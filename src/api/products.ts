@@ -41,6 +41,7 @@ export const getProductById = async (id: string) => {
 	const product: ProductItemType = {
 		id: productResponse.id,
 		category: productResponse.category,
+		description: productResponse.description,
 		name: productResponse.title,
 		price: productResponse.price,
 		coverImage: {
