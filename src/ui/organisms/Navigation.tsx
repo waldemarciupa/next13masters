@@ -10,7 +10,7 @@ export const Navigation = () => {
 					</ActiveLink>
 				</li>
 				<li className="pr-4">
-					<ActiveLink href={"/products"} exact>
+					<ActiveLink href={"/products/1"} exact>
 						All
 					</ActiveLink>
 				</li>
