@@ -13,7 +13,7 @@ export const ProductList = ({ products }: { products: ProductItemType[] }) => {
 					return <ProductListItem key={product.id} product={product} />;
 				})}
 			</ul>
-			<Pagination />
+			{products.length > 4 && <Pagination />}
 		</div>
 	);
 };
