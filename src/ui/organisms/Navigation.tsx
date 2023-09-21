@@ -18,7 +18,7 @@ export const Navigation = () => {
 				</li>
 			</ul>
 			<div>
-				<Link className="flex gap-2" href={"/cart"} exact>
+				<Link className="flex gap-2" href={"/cart"}>
 					<ShoppingBag size={24} />
 					<span>0</span>
 				</Link>
