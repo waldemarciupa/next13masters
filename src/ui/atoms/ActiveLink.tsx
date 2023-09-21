@@ -26,6 +26,7 @@ export const ActiveLink = <T extends string>({
 				"border border-transparent hover:text-zinc-400",
 				isActive && "border-b-black",
 			)}
+			aria-current={isActive ? "page" : undefined}
 		>
 			{children}
 		</Link>
