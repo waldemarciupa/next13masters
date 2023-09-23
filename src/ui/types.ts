@@ -1,10 +1,10 @@
 export type ProductItemType = {
 	id: string;
 	description?: string;
-	category: string;
+	category?: string;
 	name: string;
 	price: number;
-	coverImage: {
+	coverImage?: {
 		src: string;
 		alt: string;
 	};

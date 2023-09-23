@@ -6,7 +6,7 @@ const nextConfig = {
 	images: {
 		remotePatterns: [
 			{
-				hostname: "naszsklep-api.vercel.app",
+				hostname: "media.graphassets.com",
 			},
 		],
 	},

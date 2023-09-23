@@ -1,4 +1,6 @@
 import { type ProductItemType } from "@/ui/types";
+import { ProductsGetListDocument } from "@/gql/graphql";
+import { executeGraphql } from "@/api/executeGraphql";
 
 type ProductResponseItemType = {
 	id: string;
@@ -14,24 +16,20 @@ type ProductResponseItemType = {
 	longDescription: string;
 };
 
-export const getProducts = async (take: number) => {
-	const res = await fetch(`https://naszsklep-api.vercel.app/api/products?take=${take}`);
-	const productsResponse = (await res.json()) as ProductResponseItemType[];
+export const getProducts = async (take: number): Promise<ProductItemType[]> => {
+	const graphqlResponse = await executeGraphql(ProductsGetListDocument, { take });
 
-	const products = productsResponse.map(
-		(product): ProductItemType => ({
-			id: product.id,
-			category: product.category,
-			name: product.title,
-			price: product.price,
-			coverImage: {
-				src: product.image,
-				alt: product.title,
-			},
-		}),
-	);
-
-	return products;
+	return graphqlResponse.products.map((product) => ({
+		id: product.id,
+		description: product.description,
+		category: product.categories[0]?.name,
+		name: product.name,
+		price: product.price,
+		coverImage: product.images[0] && {
+			src: product.images[0].url,
+			alt: product.name,
+		},
+	}));
 };
 
 export const getProductById = async (id: string) => {
