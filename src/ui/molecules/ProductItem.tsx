@@ -13,7 +13,9 @@ export const ProductItem = async ({ id }: ProductItemProps) => {
 		<div>
 			<div className="flex flex-col sm:flex-row">
 				<div>
-					<ProductCoverImage src={product.coverImage.src} alt={product.coverImage.alt} />
+					{product.coverImage && (
+						<ProductCoverImage src={product.coverImage.src} alt={product.coverImage.alt} />
+					)}
 				</div>
 				<div className="mt-4 sm:mx-6 sm:mt-0 sm:w-4/12">
 					<ProductItemDescription product={product} />
