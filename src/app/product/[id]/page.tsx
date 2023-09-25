@@ -2,11 +2,11 @@ import type { Metadata } from "next";
 import { ProductItem } from "@/ui/molecules/ProductItem";
 import { getProductById } from "@/api/products";
 
-type Props = {
+type PageProps = {
 	params: { id: string };
 };
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
 	const { id } = params;
 	const product = await getProductById(id);
 
@@ -16,6 +16,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 	};
 }
 
-export default async function Page({ params }: { params: { id: string } }) {
-	return <ProductItem id={params.id} />;
+export default async function Page({ params }: PageProps) {
+	return (
+		<div className="mx-auto max-w-md p-12 sm:max-w-2xl md:max-w-3xl lg:max-w-5xl">
+			<ProductItem id={params.id} />
+		</div>
+	);
 }

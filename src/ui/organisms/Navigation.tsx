@@ -13,7 +13,7 @@ const navLinks = [
 
 export const Navigation = () => {
 	return (
-		<div className="flex h-16 items-center justify-between">
+		<div className="container mx-auto flex h-16 items-center justify-between">
 			<nav>
 				<ul className="flex text-zinc-950">
 					{navLinks.map(({ href, label }) => (
