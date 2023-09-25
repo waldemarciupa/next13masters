@@ -3,6 +3,7 @@ import { type ProductItemType } from "@/ui/types";
 import {
 	ProductGetByIdDocument,
 	ProductsGetByCategorySlugDocument,
+	ProductsGetByCollectionSlugDocument,
 	ProductsGetListDocument,
 } from "@/gql/graphql";
 import { executeGraphql } from "@/api/executeGraphql";
@@ -25,6 +26,22 @@ export const getProducts = async (take: number): Promise<ProductItemType[]> => {
 
 export const getProductsByCategory = async (slug: string): Promise<ProductItemType[]> => {
 	const graphqlResponse = await executeGraphql(ProductsGetByCategorySlugDocument, { slug });
+
+	return graphqlResponse.products.map((product) => ({
+		id: product.id,
+		description: product.description,
+		category: product.categories[0]?.name,
+		name: product.name,
+		price: product.price,
+		coverImage: product.images[0] && {
+			src: product.images[0].url,
+			alt: product.name,
+		},
+	}));
+};
+
+export const getProductsByCollection = async (slug: string): Promise<ProductItemType[]> => {
+	const graphqlResponse = await executeGraphql(ProductsGetByCollectionSlugDocument, { slug });
 
 	return graphqlResponse.products.map((product) => ({
 		id: product.id,

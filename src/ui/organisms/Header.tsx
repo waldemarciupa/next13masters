@@ -1,6 +1,7 @@
 type HeaderProps =
 	| { params: { id: string; slug?: undefined; pageNumber?: undefined } }
-	| { params: { id?: undefined; slug: string; pageNumber: string } };
+	| { params: { id?: undefined; slug: string; pageNumber: string } }
+	| { params: { id?: undefined; slug: string; pageNumber?: undefined } };
 
 export const Header = ({ params }: HeaderProps) => {
 	const { slug } = params;
