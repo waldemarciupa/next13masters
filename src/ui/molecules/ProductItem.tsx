@@ -13,8 +13,8 @@ export const ProductItem = async ({ id }: ProductItemProps) => {
 		<div>
 			<div className="flex flex-col sm:flex-row">
 				<div>
-					{product.coverImage && (
-						<ProductCoverImage src={product.coverImage.src} alt={product.coverImage.alt} />
+					{product.images[0] && (
+						<ProductCoverImage src={product.images[0].url} alt={product.name} />
 					)}
 				</div>
 				<div className="mt-4 sm:mx-6 sm:mt-0 sm:w-4/12">

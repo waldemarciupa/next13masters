@@ -1,14 +1,5 @@
 query ProductsGetList($take: Int) {
 	products(first: $take) {
-		id
-		name
-		description
-		categories(first: 1) {
-			name
-		}
-		images(first: 1) {
-			url
-		}
-		price
+		...ProductItem
 	}
 }

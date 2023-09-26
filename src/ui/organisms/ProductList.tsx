@@ -1,8 +1,8 @@
-import { type ProductItemType } from "@/ui/types";
 import { ProductListItem } from "@/ui/molecules/ProductListItem";
 import { Pagination } from "@/ui/organisms/Pagination";
+import { type ProductItemFragment } from "@/gql/graphql";
 
-export const ProductList = ({ products }: { products: ProductItemType[] }) => {
+export const ProductList = ({ products }: { products: ProductItemFragment[] }) => {
 	return (
 		<div>
 			<ul
