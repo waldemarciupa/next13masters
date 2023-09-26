@@ -1,0 +1,5 @@
+query ProductsGetByRelated($name: String!) {
+	products(first: 4, where: { categories_every: { name_not: $name } }) {
+		...ProductItem
+	}
+}

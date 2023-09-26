@@ -1,6 +1,7 @@
-import { getProductById } from "@/api/products";
+import { getProductById, getProductsByRelated } from "@/api/products";
 import { ProductCoverImage } from "@/ui/atoms/ProductCoverImage";
 import { ProductItemDescription } from "@/ui/atoms/ProductItemDescription";
+import { RelatedProductList } from "@/ui/organisms/RelatedProducts";
 
 type ProductItemProps = {
 	id: string;
@@ -8,6 +9,9 @@ type ProductItemProps = {
 
 export const ProductItem = async ({ id }: ProductItemProps) => {
 	const product = await getProductById(id);
+	const products = await getProductsByRelated(
+		product.categories[0] ? product.categories[0]?.name : "",
+	);
 
 	return (
 		<div>
@@ -21,6 +25,7 @@ export const ProductItem = async ({ id }: ProductItemProps) => {
 					<ProductItemDescription product={product} />
 				</div>
 			</div>
+			<RelatedProductList products={products} />
 		</div>
 	);
 };
