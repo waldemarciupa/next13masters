@@ -19,6 +19,7 @@ const documents = {
     "query CollectionsGetList {\n  collections {\n    ...CollectionItem\n  }\n}": types.CollectionsGetListDocument,
     "fragment ProductItem on Product {\n  id\n  name\n  description\n  categories(first: 1) {\n    name\n  }\n  images(first: 1) {\n    url\n  }\n  price\n}": types.ProductItemFragmentDoc,
     "query ProductGetById($id: ID!) {\n  product(where: {id: $id}) {\n    ...ProductItem\n  }\n}": types.ProductGetByIdDocument,
+    "query ProductGetBySearch($searchQuery: String!) {\n  products(where: {name_contains: $searchQuery}) {\n    ...ProductItem\n  }\n}": types.ProductGetBySearchDocument,
     "query ProductsGetByCategorySlug($slug: String!) {\n  products(first: 10, where: {categories_some: {slug: $slug}}) {\n    ...ProductItem\n  }\n}": types.ProductsGetByCategorySlugDocument,
     "query ProductsGetByCollectionSlug($slug: String!) {\n  products(first: 10, where: {collections_some: {slug: $slug}}) {\n    ...ProductItem\n  }\n}": types.ProductsGetByCollectionSlugDocument,
     "query ProductsGetByRelated($name: String!) {\n  products(first: 4, where: {categories_every: {name_not: $name}}) {\n    ...ProductItem\n  }\n}": types.ProductsGetByRelatedDocument,
@@ -45,6 +46,10 @@ export function graphql(source: "fragment ProductItem on Product {\n  id\n  name
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "query ProductGetById($id: ID!) {\n  product(where: {id: $id}) {\n    ...ProductItem\n  }\n}"): typeof import('./graphql').ProductGetByIdDocument;
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "query ProductGetBySearch($searchQuery: String!) {\n  products(where: {name_contains: $searchQuery}) {\n    ...ProductItem\n  }\n}"): typeof import('./graphql').ProductGetBySearchDocument;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

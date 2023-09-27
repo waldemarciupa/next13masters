@@ -1,0 +1,5 @@
+query ProductGetBySearch($searchQuery: String!) {
+	products(where: { name_contains: $searchQuery }) {
+		...ProductItem
+	}
+}

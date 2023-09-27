@@ -10738,6 +10738,13 @@ export type ProductGetByIdQueryVariables = Exact<{
 
 export type ProductGetByIdQuery = { product?: { id: string, name: string, description: string, price: number, categories: Array<{ name: string }>, images: Array<{ url: string }> } | null };
 
+export type ProductGetBySearchQueryVariables = Exact<{
+  searchQuery: Scalars['String']['input'];
+}>;
+
+
+export type ProductGetBySearchQuery = { products: Array<{ id: string, name: string, description: string, price: number, categories: Array<{ name: string }>, images: Array<{ url: string }> }> };
+
 export type ProductsGetByCategorySlugQueryVariables = Exact<{
   slug: Scalars['String']['input'];
 }>;
@@ -10853,6 +10860,24 @@ export const ProductGetByIdDocument = new TypedDocumentString(`
   }
   price
 }`) as unknown as TypedDocumentString<ProductGetByIdQuery, ProductGetByIdQueryVariables>;
+export const ProductGetBySearchDocument = new TypedDocumentString(`
+    query ProductGetBySearch($searchQuery: String!) {
+  products(where: {name_contains: $searchQuery}) {
+    ...ProductItem
+  }
+}
+    fragment ProductItem on Product {
+  id
+  name
+  description
+  categories(first: 1) {
+    name
+  }
+  images(first: 1) {
+    url
+  }
+  price
+}`) as unknown as TypedDocumentString<ProductGetBySearchQuery, ProductGetBySearchQueryVariables>;
 export const ProductsGetByCategorySlugDocument = new TypedDocumentString(`
     query ProductsGetByCategorySlug($slug: String!) {
   products(first: 10, where: {categories_some: {slug: $slug}}) {

@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ShoppingBag } from "lucide-react";
 import { type Route } from "next";
 import { ActiveLink } from "@/ui/atoms/ActiveLink";
+import { Search } from "@/ui/molecules/Search";
 
 const navLinks = [
 	{ href: "/", label: "Home" },
@@ -25,10 +26,13 @@ export const Navigation = () => {
 					))}
 				</ul>
 			</nav>
-			<div>
-				<Link className="flex gap-2" href={"/cart"}>
+			<div className="flex items-center gap-4 ">
+				<Search />
+				<Link className="flex  text-zinc-950" href={"/cart"}>
 					<ShoppingBag size={24} />
-					<span>0</span>
+					<div className="w-4">
+						<span className="ml-2 text-sm font-medium ">0</span>
+					</div>
 				</Link>
 			</div>
 		</div>

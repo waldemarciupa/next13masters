@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import {
 	ProductGetByIdDocument,
+	ProductGetBySearchDocument,
 	ProductsGetByCategorySlugDocument,
 	ProductsGetByCollectionSlugDocument,
 	ProductsGetByRelatedDocument,
@@ -25,6 +26,15 @@ export const getProductsByCollection = async (slug: string) => {
 
 export const getProductsByRelated = async (name: string) => {
 	const graphqlResponse = await executeGraphql(ProductsGetByRelatedDocument, { name });
+	return graphqlResponse.products;
+};
+
+export const getProductsBySearch = async (searchQuery: string) => {
+	if (!searchQuery) {
+		return [];
+	}
+
+	const graphqlResponse = await executeGraphql(ProductGetBySearchDocument, { searchQuery });
 	return graphqlResponse.products;
 };
 
