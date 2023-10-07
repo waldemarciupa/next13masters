@@ -1,4 +1,5 @@
 import { revalidateTag } from "next/cache";
+import { Suspense } from "react";
 import { getProductById } from "@/api/products";
 import { ProductCoverImage } from "@/ui/atoms/ProductCoverImage";
 import { ProductItemDescription } from "@/ui/atoms/ProductItemDescription";
@@ -38,7 +39,9 @@ export const ProductItem = async ({ id }: ProductItemProps) => {
 					</form>
 				</div>
 			</div>
-			<RelatedProductList product={product} />
+			<Suspense>
+				<RelatedProductList product={product} />
+			</Suspense>
 		</div>
 	);
 };
