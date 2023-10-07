@@ -6,9 +6,9 @@ import { CartRemoveProductDocument, CartSetProductQuantityDocument } from "@/gql
 export const removeItem = (itemId: string) => {
 	console.log("removeItem", itemId);
 
-	return executeGraphql(CartRemoveProductDocument, { itemId });
+	return executeGraphql({ query: CartRemoveProductDocument, variables: { itemId } });
 };
 
 export const changeItemQuantity = (itemId: string, quantity: number) => {
-	return executeGraphql(CartSetProductQuantityDocument, { itemId, quantity });
+	return executeGraphql({ query: CartSetProductQuantityDocument, variables: { itemId, quantity } });
 };

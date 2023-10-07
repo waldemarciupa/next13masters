@@ -10,22 +10,34 @@ import {
 import { executeGraphql } from "@/api/executeGraphql";
 
 export const getProducts = async (take: number) => {
-	const graphqlResponse = await executeGraphql(ProductsGetListDocument, { take });
+	const graphqlResponse = await executeGraphql({
+		query: ProductsGetListDocument,
+		variables: { take },
+	});
 	return graphqlResponse.products;
 };
 
 export const getProductsByCategory = async (slug: string) => {
-	const graphqlResponse = await executeGraphql(ProductsGetByCategorySlugDocument, { slug });
+	const graphqlResponse = await executeGraphql({
+		query: ProductsGetByCategorySlugDocument,
+		variables: { slug },
+	});
 	return graphqlResponse.products;
 };
 
 export const getProductsByCollection = async (slug: string) => {
-	const graphqlResponse = await executeGraphql(ProductsGetByCollectionSlugDocument, { slug });
+	const graphqlResponse = await executeGraphql({
+		query: ProductsGetByCollectionSlugDocument,
+		variables: { slug },
+	});
 	return graphqlResponse.products;
 };
 
 export const getProductsByRelated = async (name: string) => {
-	const graphqlResponse = await executeGraphql(ProductsGetByRelatedDocument, { name });
+	const graphqlResponse = await executeGraphql({
+		query: ProductsGetByRelatedDocument,
+		variables: { name },
+	});
 	return graphqlResponse.products;
 };
 
@@ -34,12 +46,18 @@ export const getProductsBySearch = async (searchQuery: string) => {
 		return [];
 	}
 
-	const graphqlResponse = await executeGraphql(ProductGetBySearchDocument, { searchQuery });
+	const graphqlResponse = await executeGraphql({
+		query: ProductGetBySearchDocument,
+		variables: { searchQuery },
+	});
 	return graphqlResponse.products;
 };
 
 export const getProductById = async (id: string) => {
-	const productResponse = await executeGraphql(ProductGetByIdDocument, { id });
+	const productResponse = await executeGraphql({
+		query: ProductGetByIdDocument,
+		variables: { id },
+	});
 	const { product } = productResponse;
 
 	if (!product) {
