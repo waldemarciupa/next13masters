@@ -1,4 +1,4 @@
-import { getProducts } from "@/api/products";
+import { getProductsList } from "@/api/products";
 import { Header } from "@/ui/organisms/Header";
 import { ProductList } from "@/ui/organisms/ProductList";
 
@@ -7,7 +7,7 @@ type PageProps = {
 };
 
 export default async function Page({ params }: PageProps) {
-	const products = await getProducts(20);
+	const products = await getProductsList(20);
 
 	return (
 		<div>

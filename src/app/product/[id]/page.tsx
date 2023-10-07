@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 import { ProductItem } from "@/ui/molecules/ProductItem";
-import { getProductById, getProducts } from "@/api/products";
+import { getProductById, getProductsList } from "@/api/products";
 
 type PageProps = {
 	params: { id: string };
 };
 
 export const generateStaticParams = async () => {
-	const products = await getProducts(20);
+	const products = await getProductsList(20);
 	return products.map((product) => ({ id: product.id }));
 };
 

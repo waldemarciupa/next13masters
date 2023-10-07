@@ -9,7 +9,7 @@ import {
 } from "@/gql/graphql";
 import { executeGraphql } from "@/api/executeGraphql";
 
-export const getProducts = async (take: number) => {
+export const getProductsList = async (take: number) => {
 	const graphqlResponse = await executeGraphql({
 		query: ProductsGetListDocument,
 		variables: { take },

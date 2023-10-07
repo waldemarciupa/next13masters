@@ -1,10 +1,10 @@
 import { getCollections } from "@/api/collections";
-import { getProducts } from "@/api/products";
+import { getProductsList } from "@/api/products";
 import { CollectionList } from "@/ui/organisms/CollectionList";
 import { ProductList } from "@/ui/organisms/ProductList";
 
 export default async function Home() {
-	const products = await getProducts(4);
+	const products = await getProductsList(4);
 	const collections = await getCollections();
 
 	return (
