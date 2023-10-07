@@ -1,7 +1,7 @@
 import { revalidateTag } from "next/cache";
 import { Suspense } from "react";
+import Image from "next/image";
 import { getProductById } from "@/api/products";
-import { ProductCoverImage } from "@/ui/atoms/ProductCoverImage";
 import { ProductItemDescription } from "@/ui/atoms/ProductItemDescription";
 import { RelatedProductList } from "@/ui/organisms/RelatedProducts";
 import { AddToCartButton } from "@/ui/atoms/AddToCartButton";
@@ -26,7 +26,17 @@ export const ProductItem = async ({ id }: ProductItemProps) => {
 	return (
 		<div>
 			<div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-				{product.images[0] && <ProductCoverImage src={product.images[0].url} alt={product.name} />}
+				{product.images[0] && (
+					<div className="aspect-square overflow-hidden rounded-md border bg-slate-50 hover:bg-slate-100">
+						<Image
+							width={320}
+							height={320}
+							alt={product.name}
+							src={product.images[0].url}
+							className="h-full w-full object-cover object-center p-4 transition-transform hover:scale-105"
+						/>
+					</div>
+				)}
 				<div className="mt-4 sm:mx-6 sm:mt-0">
 					<ProductItemDescription product={product} />
 					<form action={addToCartAction}>
