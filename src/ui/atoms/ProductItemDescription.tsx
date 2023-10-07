@@ -20,7 +20,7 @@ export const ProductItemDescription = ({
 					</p>
 				</div>
 			</div>
-			<div>{description}</div>
+			<div>{description.split(".")[0]}.</div>
 		</div>
 	);
 };
