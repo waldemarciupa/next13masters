@@ -1,9 +1,14 @@
 import type { Metadata } from "next";
 import { ProductItem } from "@/ui/molecules/ProductItem";
-import { getProductById } from "@/api/products";
+import { getProductById, getProducts } from "@/api/products";
 
 type PageProps = {
 	params: { id: string };
+};
+
+export const generateStaticParams = async () => {
+	const products = await getProducts(20);
+	return products.map((product) => ({ id: product.id }));
 };
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
