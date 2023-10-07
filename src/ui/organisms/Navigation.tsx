@@ -3,6 +3,7 @@ import { ShoppingBag } from "lucide-react";
 import { type Route } from "next";
 import { ActiveLink } from "@/ui/atoms/ActiveLink";
 import { Search } from "@/ui/molecules/Search";
+import { getCartByCookieId } from "@/api/cart";
 
 const navLinks = [
 	{ href: "/", label: "Home" },
@@ -12,7 +13,9 @@ const navLinks = [
 	{ href: "/categories/accessories", label: "Accessories" },
 ];
 
-export const Navigation = () => {
+export const Navigation = async () => {
+	const cart = await getCartByCookieId();
+	const quantity = cart?.orderItems.length || 0;
 	return (
 		<div className="container mx-auto flex h-16 items-center justify-between">
 			<nav>
@@ -31,7 +34,7 @@ export const Navigation = () => {
 				<Link className="flex  text-zinc-950" href={"/cart"}>
 					<ShoppingBag size={24} />
 					<div className="w-4">
-						<span className="ml-2 text-sm font-medium ">0</span>
+						<span className="ml-2 text-sm font-medium ">{quantity}</span>
 					</div>
 				</Link>
 			</div>

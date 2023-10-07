@@ -16,7 +16,11 @@ export const executeGraphql = async <TResult, TVariables>(
 		}),
 		headers: {
 			"Content-Type": "application/json",
+			Authorization: `Bearer ${process.env.HYGRAPH_MUTATION_TOKEN}`,
 		},
+		// next: {
+		// 	tags: ["cart"],
+		// },
 	});
 
 	type GraphQLResponse<T> =
@@ -26,6 +30,8 @@ export const executeGraphql = async <TResult, TVariables>(
 	const graphqlResponse = (await res.json()) as GraphQLResponse<TResult>;
 
 	if (graphqlResponse.errors) {
+		console.log(graphqlResponse.errors);
+
 		throw TypeError(`GraphQL Error`, {
 			cause: graphqlResponse.errors,
 		});
