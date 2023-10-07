@@ -33,6 +33,7 @@ export const ProductItem = async ({ id }: ProductItemProps) => {
 							height={320}
 							alt={product.name}
 							src={product.images[0].url}
+							fetchPriority="high"
 							className="h-full w-full object-cover object-center p-4 transition-transform hover:scale-105"
 						/>
 					</div>
