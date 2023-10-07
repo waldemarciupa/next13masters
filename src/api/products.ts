@@ -13,6 +13,9 @@ export const getProductsList = async (take: number) => {
 	const graphqlResponse = await executeGraphql({
 		query: ProductsGetListDocument,
 		variables: { take },
+		next: {
+			revalidate: 10,
+		},
 	});
 	return graphqlResponse.products;
 };
