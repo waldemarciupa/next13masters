@@ -25,13 +25,9 @@ export const ProductItem = async ({ id }: ProductItemProps) => {
 
 	return (
 		<div>
-			<div className="flex flex-col sm:flex-row">
-				<div>
-					{product.images[0] && (
-						<ProductCoverImage src={product.images[0].url} alt={product.name} />
-					)}
-				</div>
-				<div className="mt-4 sm:mx-6 sm:mt-0 sm:w-4/12">
+			<div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+				{product.images[0] && <ProductCoverImage src={product.images[0].url} alt={product.name} />}
+				<div className="mt-4 sm:mx-6 sm:mt-0">
 					<ProductItemDescription product={product} />
 					<form action={addToCartAction}>
 						<input type="hidden" name="productId" value={product.id} />

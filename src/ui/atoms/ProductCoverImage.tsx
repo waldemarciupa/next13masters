@@ -9,6 +9,8 @@ export const ProductCoverImage = ({ src, alt }: { src: string; alt: string }) =>
 				alt={alt}
 				src={src}
 				className="h-full w-full object-cover object-center p-4 transition-transform hover:scale-105"
+				loading="lazy"
+				decoding="async"
 			/>
 		</div>
 	);
