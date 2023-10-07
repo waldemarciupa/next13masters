@@ -1,7 +1,12 @@
+import { getProductsByRelated } from "@/api/products";
 import { type ProductItemFragment } from "@/gql/graphql";
 import { ProductListItem } from "@/ui/molecules/ProductListItem";
 
-export const RelatedProductList = ({ products }: { products: ProductItemFragment[] }) => {
+export const RelatedProductList = async ({ product }: { product: ProductItemFragment }) => {
+	const products = await getProductsByRelated(
+		product.categories[0] ? product.categories[0]?.name : "",
+	);
+
 	return (
 		<div className="my-8">
 			<h2 className="py-8 text-xl font-semibold leading-7">Related Products</h2>

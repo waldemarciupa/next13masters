@@ -1,5 +1,5 @@
 import { revalidateTag } from "next/cache";
-import { getProductById, getProductsByRelated } from "@/api/products";
+import { getProductById } from "@/api/products";
 import { ProductCoverImage } from "@/ui/atoms/ProductCoverImage";
 import { ProductItemDescription } from "@/ui/atoms/ProductItemDescription";
 import { RelatedProductList } from "@/ui/organisms/RelatedProducts";
@@ -12,9 +12,6 @@ type ProductItemProps = {
 
 export const ProductItem = async ({ id }: ProductItemProps) => {
 	const product = await getProductById(id);
-	const products = await getProductsByRelated(
-		product.categories[0] ? product.categories[0]?.name : "",
-	);
 
 	async function addToCartAction(_formData: FormData) {
 		"use server";
@@ -41,7 +38,7 @@ export const ProductItem = async ({ id }: ProductItemProps) => {
 					</form>
 				</div>
 			</div>
-			<RelatedProductList products={products} />
+			<RelatedProductList product={product} />
 		</div>
 	);
 };
