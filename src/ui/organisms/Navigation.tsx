@@ -17,7 +17,7 @@ export const Navigation = async () => {
 	const cart = await getCartByCookieId();
 	const quantity = cart?.orderItems.length || 0;
 	return (
-		<div className="container mx-auto flex h-16 items-center justify-between">
+		<div className="container mx-auto flex h-16 items-center justify-between px-8">
 			<nav>
 				<ul className="flex text-zinc-950">
 					{navLinks.map(({ href, label }) => (
