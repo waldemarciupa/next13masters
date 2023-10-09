@@ -10715,28 +10715,31 @@ export type _SystemDateTimeFieldVariation =
   | 'combined'
   | 'localization';
 
-export type CartAddProductMutationVariables = Exact<{
+export type CartAddOrUpdateOrderMutationVariables = Exact<{
   orderId: Scalars['ID']['input'];
-  total: Scalars['Int']['input'];
+  orderTotal: Scalars['Int']['input'];
   productId: Scalars['ID']['input'];
+  total: Scalars['Int']['input'];
+  orderItemId: Scalars['ID']['input'];
+  quantity: Scalars['Int']['input'];
 }>;
 
 
-export type CartAddProductMutation = { createOrderItem?: { id: string } | null };
+export type CartAddOrUpdateOrderMutation = { upsertOrder?: { id: string } | null };
 
 export type CartCreateMutationVariables = Exact<{ [key: string]: never; }>;
 
 
-export type CartCreateMutation = { createOrder?: { id: string, orderItems: Array<{ id: string, quantity: number, total: number, product?: { id: string, name: string, price: number } | null }> } | null };
+export type CartCreateMutation = { createOrder?: { id: string, total: number, orderItems: Array<{ id: string, quantity: number, total: number, product?: { id: string, name: string, price: number } | null }> } | null };
 
 export type CartGetByIdQueryVariables = Exact<{
   id: Scalars['ID']['input'];
 }>;
 
 
-export type CartGetByIdQuery = { order?: { id: string, orderItems: Array<{ id: string, quantity: number, total: number, product?: { id: string, name: string, price: number } | null }> } | null };
+export type CartGetByIdQuery = { order?: { id: string, total: number, orderItems: Array<{ id: string, quantity: number, total: number, product?: { id: string, name: string, price: number } | null }> } | null };
 
-export type CartFragment = { id: string, orderItems: Array<{ id: string, quantity: number, total: number, product?: { id: string, name: string, price: number } | null }> };
+export type CartFragment = { id: string, total: number, orderItems: Array<{ id: string, quantity: number, total: number, product?: { id: string, name: string, price: number } | null }> };
 
 export type CartRemoveProductMutationVariables = Exact<{
   itemId: Scalars['ID']['input'];
@@ -10828,6 +10831,7 @@ export class TypedDocumentString<TResult, TVariables>
 export const CartFragmentDoc = new TypedDocumentString(`
     fragment Cart on Order {
   id
+  total
   orderItems {
     id
     quantity
@@ -10865,15 +10869,16 @@ export const ProductItemFragmentDoc = new TypedDocumentString(`
   price
 }
     `, {"fragmentName":"ProductItem"}) as unknown as TypedDocumentString<ProductItemFragment, unknown>;
-export const CartAddProductDocument = new TypedDocumentString(`
-    mutation CartAddProduct($orderId: ID!, $total: Int!, $productId: ID!) {
-  createOrderItem(
-    data: {total: $total, quantity: 1, order: {connect: {id: $orderId}}, product: {connect: {id: $productId}}}
+export const CartAddOrUpdateOrderDocument = new TypedDocumentString(`
+    mutation CartAddOrUpdateOrder($orderId: ID!, $orderTotal: Int!, $productId: ID!, $total: Int!, $orderItemId: ID!, $quantity: Int!) {
+  upsertOrder(
+    where: {id: $orderId}
+    upsert: {create: {total: $orderTotal, orderItems: {create: {total: $total, quantity: 1, product: {connect: {id: $productId}}}}}, update: {total: $orderTotal, orderItems: {upsert: {where: {id: $orderItemId}, data: {create: {total: $total, quantity: 1, product: {connect: {id: $productId}}}, update: {total: $total, quantity: $quantity, product: {connect: {id: $productId}}}}}}}}
   ) {
     id
   }
 }
-    `) as unknown as TypedDocumentString<CartAddProductMutation, CartAddProductMutationVariables>;
+    `) as unknown as TypedDocumentString<CartAddOrUpdateOrderMutation, CartAddOrUpdateOrderMutationVariables>;
 export const CartCreateDocument = new TypedDocumentString(`
     mutation CartCreate {
   createOrder(data: {total: 0}) {
@@ -10882,6 +10887,7 @@ export const CartCreateDocument = new TypedDocumentString(`
 }
     fragment Cart on Order {
   id
+  total
   orderItems {
     id
     quantity
@@ -10901,6 +10907,7 @@ export const CartGetByIdDocument = new TypedDocumentString(`
 }
     fragment Cart on Order {
   id
+  total
   orderItems {
     id
     quantity
