@@ -32,7 +32,7 @@ export default async function Page() {
 									</td>
 									<td>{formatPrice(item.product.price)}</td>
 									<td>
-										<RemoveButton productId={item.product.id} />
+										<RemoveButton productId={item.id} />
 									</td>
 								</tr>
 							),

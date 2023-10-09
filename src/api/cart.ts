@@ -8,7 +8,7 @@ import {
 	CartAddProductDocument,
 } from "@/gql/graphql";
 
-export async function getOrCreateCart(): Promise<CartFragment> {
+export async function getOrCreateCart(): Promise<CartFragment | { id: string }> {
 	const existingCart = await getCartByCookieId();
 
 	if (existingCart) {
