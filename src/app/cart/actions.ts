@@ -10,5 +10,12 @@ export const removeItem = (itemId: string) => {
 };
 
 export const changeItemQuantity = (itemId: string, quantity: number) => {
-	return executeGraphql({ query: CartSetProductQuantityDocument, variables: { itemId, quantity } });
+	return executeGraphql({
+		query: CartSetProductQuantityDocument,
+		variables: { itemId, quantity },
+		cache: "no-store",
+		next: {
+			tags: ["cart"],
+		},
+	});
 };
