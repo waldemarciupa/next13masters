@@ -56,7 +56,7 @@ export async function addToCart(orderId: string, productId: string, cart: CartFr
 		query: CartAddOrUpdateOrderDocument,
 		variables: {
 			orderId: orderId,
-			orderTotal: ((cart?.total as number) ?? 0) + product.price,
+			orderTotal: (cart?.total ?? 0) + product.price,
 			productId: productId,
 			total: (orderItem?.total ?? 0) + 1,
 			orderItemId: orderItem?.id || "",
