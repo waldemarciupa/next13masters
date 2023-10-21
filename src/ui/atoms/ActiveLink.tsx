@@ -23,8 +23,8 @@ export const ActiveLink = <T extends string>({
 		<Link
 			href={href as Route}
 			className={clsx(
-				"border border-transparent hover:text-zinc-400",
-				isActive && "border-b-black",
+				"whitespace-nowrap border border-transparent hover:text-zinc-400",
+				isActive && "border-b-black hover:border-b-zinc-400",
 			)}
 			aria-current={isActive ? "page" : undefined}
 		>
