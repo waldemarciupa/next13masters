@@ -1,5 +1,6 @@
 import { getCollections } from "@/api/collections";
 import { getProductsList } from "@/api/products";
+import { SectionWrapper } from "@/ui/molecules/SectionWrapper";
 import { CollectionList } from "@/ui/organisms/CollectionList";
 import { ProductList } from "@/ui/organisms/ProductList";
 
@@ -10,9 +11,9 @@ export default async function Home() {
 	return (
 		<div>
 			<CollectionList collections={collections} />
-			<section className="mx-auto max-w-md py-12 sm:max-w-2xl md:max-w-3xl lg:max-w-5xl">
+			<SectionWrapper>
 				<ProductList products={products} />
-			</section>
+			</SectionWrapper>
 		</div>
 	);
 }

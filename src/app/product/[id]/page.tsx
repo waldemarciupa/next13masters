@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { ProductItem } from "@/ui/molecules/ProductItem";
 import { getProductById, getProductsList } from "@/api/products";
+import { SectionWrapper } from "@/ui/molecules/SectionWrapper";
 
 type PageProps = {
 	params: { id: string };
@@ -35,8 +36,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function Page({ params }: PageProps) {
 	return (
-		<div className="mx-auto max-w-md p-12 sm:max-w-2xl md:max-w-3xl lg:max-w-5xl">
+		<SectionWrapper>
 			<ProductItem id={params.id} />
-		</div>
+		</SectionWrapper>
 	);
 }

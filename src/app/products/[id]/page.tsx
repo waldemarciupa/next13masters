@@ -1,4 +1,5 @@
 import { getProductsList } from "@/api/products";
+import { SectionWrapper } from "@/ui/molecules/SectionWrapper";
 import { Header } from "@/ui/organisms/Header";
 import { ProductList } from "@/ui/organisms/ProductList";
 
@@ -12,9 +13,9 @@ export default async function Page({ params }: PageProps) {
 	return (
 		<div>
 			<Header params={params} />
-			<section className="mx-auto max-w-md py-12 sm:max-w-2xl md:max-w-3xl lg:max-w-5xl">
+			<SectionWrapper>
 				<ProductList products={products} />
-			</section>
+			</SectionWrapper>
 		</div>
 	);
 }
