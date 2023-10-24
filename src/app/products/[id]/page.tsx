@@ -8,7 +8,10 @@ type PageProps = {
 };
 
 export default async function Page({ params }: PageProps) {
-	const products = await getProductsList(20);
+	const { id } = params;
+	const skip = (Number(id) - 1) * 8;
+
+	const products = await getProductsList(skip, 8);
 
 	return (
 		<div>

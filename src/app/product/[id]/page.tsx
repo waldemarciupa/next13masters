@@ -8,7 +8,7 @@ type PageProps = {
 };
 
 export const generateStaticParams = async () => {
-	const products = await getProductsList(20);
+	const products = await getProductsList(0, 100);
 	return products.map((product) => ({ id: product.id }));
 };
 

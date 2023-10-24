@@ -1,5 +1,4 @@
 import { ProductListItem } from "@/ui/molecules/ProductListItem";
-import { Pagination } from "@/ui/organisms/Pagination";
 import { type ProductItemFragment } from "@/gql/graphql";
 
 export const ProductList = ({ products }: { products: ProductItemFragment[] }) => {
@@ -13,7 +12,6 @@ export const ProductList = ({ products }: { products: ProductItemFragment[] }) =
 					return <ProductListItem key={product.id} product={product} />;
 				})}
 			</ul>
-			{products.length > 4 && <Pagination />}
 		</div>
 	);
 };
