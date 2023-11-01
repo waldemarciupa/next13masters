@@ -9,4 +9,28 @@ fragment ProductItem on Product {
 		url
 	}
 	price
+	variants {
+		__typename
+		... on ProductColorVariant {
+			id
+			name
+			color
+			product {
+				images {
+					url
+				}
+			}
+		}
+		... on ProductSizeColorVariant {
+			id
+			name
+			color
+			size
+		}
+		... on ProductSizeVariant {
+			id
+			name
+			size
+		}
+	}
 }

@@ -10817,42 +10817,42 @@ export type CollectionsGetListQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type CollectionsGetListQuery = { collections: Array<{ id: string, slug: string, name: string, description?: string | null, image: { url: string } }> };
 
-export type ProductItemFragment = { id: string, name: string, description: string, price: number, categories: Array<{ name: string }>, images: Array<{ url: string }> };
+export type ProductItemFragment = { id: string, name: string, description: string, price: number, categories: Array<{ name: string }>, images: Array<{ url: string }>, variants: Array<{ __typename: 'ProductColorVariant', id: string, name: string, color: ProductColor, product?: { images: Array<{ url: string }> } | null } | { __typename: 'ProductSizeColorVariant', id: string, name: string, color: ProductColor, size: ProductSize } | { __typename: 'ProductSizeVariant', id: string, name: string, size: ProductSize }> };
 
 export type ProductGetByIdQueryVariables = Exact<{
   id: Scalars['ID']['input'];
 }>;
 
 
-export type ProductGetByIdQuery = { product?: { id: string, name: string, description: string, price: number, categories: Array<{ name: string }>, images: Array<{ url: string }> } | null };
+export type ProductGetByIdQuery = { product?: { id: string, name: string, description: string, price: number, categories: Array<{ name: string }>, images: Array<{ url: string }>, variants: Array<{ __typename: 'ProductColorVariant', id: string, name: string, color: ProductColor, product?: { images: Array<{ url: string }> } | null } | { __typename: 'ProductSizeColorVariant', id: string, name: string, color: ProductColor, size: ProductSize } | { __typename: 'ProductSizeVariant', id: string, name: string, size: ProductSize }> } | null };
 
 export type ProductGetBySearchQueryVariables = Exact<{
   searchQuery: Scalars['String']['input'];
 }>;
 
 
-export type ProductGetBySearchQuery = { products: Array<{ id: string, name: string, description: string, price: number, categories: Array<{ name: string }>, images: Array<{ url: string }> }> };
+export type ProductGetBySearchQuery = { products: Array<{ id: string, name: string, description: string, price: number, categories: Array<{ name: string }>, images: Array<{ url: string }>, variants: Array<{ __typename: 'ProductColorVariant', id: string, name: string, color: ProductColor, product?: { images: Array<{ url: string }> } | null } | { __typename: 'ProductSizeColorVariant', id: string, name: string, color: ProductColor, size: ProductSize } | { __typename: 'ProductSizeVariant', id: string, name: string, size: ProductSize }> }> };
 
 export type ProductsGetByCategorySlugQueryVariables = Exact<{
   slug: Scalars['String']['input'];
 }>;
 
 
-export type ProductsGetByCategorySlugQuery = { products: Array<{ id: string, name: string, description: string, price: number, categories: Array<{ name: string }>, images: Array<{ url: string }> }> };
+export type ProductsGetByCategorySlugQuery = { products: Array<{ id: string, name: string, description: string, price: number, categories: Array<{ name: string }>, images: Array<{ url: string }>, variants: Array<{ __typename: 'ProductColorVariant', id: string, name: string, color: ProductColor, product?: { images: Array<{ url: string }> } | null } | { __typename: 'ProductSizeColorVariant', id: string, name: string, color: ProductColor, size: ProductSize } | { __typename: 'ProductSizeVariant', id: string, name: string, size: ProductSize }> }> };
 
 export type ProductsGetByCollectionSlugQueryVariables = Exact<{
   slug: Scalars['String']['input'];
 }>;
 
 
-export type ProductsGetByCollectionSlugQuery = { products: Array<{ id: string, name: string, description: string, price: number, categories: Array<{ name: string }>, images: Array<{ url: string }> }> };
+export type ProductsGetByCollectionSlugQuery = { products: Array<{ id: string, name: string, description: string, price: number, categories: Array<{ name: string }>, images: Array<{ url: string }>, variants: Array<{ __typename: 'ProductColorVariant', id: string, name: string, color: ProductColor, product?: { images: Array<{ url: string }> } | null } | { __typename: 'ProductSizeColorVariant', id: string, name: string, color: ProductColor, size: ProductSize } | { __typename: 'ProductSizeVariant', id: string, name: string, size: ProductSize }> }> };
 
 export type ProductsGetByRelatedQueryVariables = Exact<{
   name: Scalars['String']['input'];
 }>;
 
 
-export type ProductsGetByRelatedQuery = { products: Array<{ id: string, name: string, description: string, price: number, categories: Array<{ name: string }>, images: Array<{ url: string }> }> };
+export type ProductsGetByRelatedQuery = { products: Array<{ id: string, name: string, description: string, price: number, categories: Array<{ name: string }>, images: Array<{ url: string }>, variants: Array<{ __typename: 'ProductColorVariant', id: string, name: string, color: ProductColor, product?: { images: Array<{ url: string }> } | null } | { __typename: 'ProductSizeColorVariant', id: string, name: string, color: ProductColor, size: ProductSize } | { __typename: 'ProductSizeVariant', id: string, name: string, size: ProductSize }> }> };
 
 export type ProductsGetListQueryVariables = Exact<{
   skip?: InputMaybe<Scalars['Int']['input']>;
@@ -10860,7 +10860,7 @@ export type ProductsGetListQueryVariables = Exact<{
 }>;
 
 
-export type ProductsGetListQuery = { products: Array<{ id: string, name: string, description: string, price: number, categories: Array<{ name: string }>, images: Array<{ url: string }> }> };
+export type ProductsGetListQuery = { products: Array<{ id: string, name: string, description: string, price: number, categories: Array<{ name: string }>, images: Array<{ url: string }>, variants: Array<{ __typename: 'ProductColorVariant', id: string, name: string, color: ProductColor, product?: { images: Array<{ url: string }> } | null } | { __typename: 'ProductSizeColorVariant', id: string, name: string, color: ProductColor, size: ProductSize } | { __typename: 'ProductSizeVariant', id: string, name: string, size: ProductSize }> }> };
 
 export class TypedDocumentString<TResult, TVariables>
   extends String
@@ -10915,6 +10915,30 @@ export const ProductItemFragmentDoc = new TypedDocumentString(`
     url
   }
   price
+  variants {
+    __typename
+    ... on ProductColorVariant {
+      id
+      name
+      color
+      product {
+        images {
+          url
+        }
+      }
+    }
+    ... on ProductSizeColorVariant {
+      id
+      name
+      color
+      size
+    }
+    ... on ProductSizeVariant {
+      id
+      name
+      size
+    }
+  }
 }
     `, {"fragmentName":"ProductItem"}) as unknown as TypedDocumentString<ProductItemFragment, unknown>;
 export const CartAddOrUpdateOrderDocument = new TypedDocumentString(`
@@ -11029,6 +11053,30 @@ export const ProductGetByIdDocument = new TypedDocumentString(`
     url
   }
   price
+  variants {
+    __typename
+    ... on ProductColorVariant {
+      id
+      name
+      color
+      product {
+        images {
+          url
+        }
+      }
+    }
+    ... on ProductSizeColorVariant {
+      id
+      name
+      color
+      size
+    }
+    ... on ProductSizeVariant {
+      id
+      name
+      size
+    }
+  }
 }`) as unknown as TypedDocumentString<ProductGetByIdQuery, ProductGetByIdQueryVariables>;
 export const ProductGetBySearchDocument = new TypedDocumentString(`
     query ProductGetBySearch($searchQuery: String!) {
@@ -11047,6 +11095,30 @@ export const ProductGetBySearchDocument = new TypedDocumentString(`
     url
   }
   price
+  variants {
+    __typename
+    ... on ProductColorVariant {
+      id
+      name
+      color
+      product {
+        images {
+          url
+        }
+      }
+    }
+    ... on ProductSizeColorVariant {
+      id
+      name
+      color
+      size
+    }
+    ... on ProductSizeVariant {
+      id
+      name
+      size
+    }
+  }
 }`) as unknown as TypedDocumentString<ProductGetBySearchQuery, ProductGetBySearchQueryVariables>;
 export const ProductsGetByCategorySlugDocument = new TypedDocumentString(`
     query ProductsGetByCategorySlug($slug: String!) {
@@ -11065,6 +11137,30 @@ export const ProductsGetByCategorySlugDocument = new TypedDocumentString(`
     url
   }
   price
+  variants {
+    __typename
+    ... on ProductColorVariant {
+      id
+      name
+      color
+      product {
+        images {
+          url
+        }
+      }
+    }
+    ... on ProductSizeColorVariant {
+      id
+      name
+      color
+      size
+    }
+    ... on ProductSizeVariant {
+      id
+      name
+      size
+    }
+  }
 }`) as unknown as TypedDocumentString<ProductsGetByCategorySlugQuery, ProductsGetByCategorySlugQueryVariables>;
 export const ProductsGetByCollectionSlugDocument = new TypedDocumentString(`
     query ProductsGetByCollectionSlug($slug: String!) {
@@ -11083,6 +11179,30 @@ export const ProductsGetByCollectionSlugDocument = new TypedDocumentString(`
     url
   }
   price
+  variants {
+    __typename
+    ... on ProductColorVariant {
+      id
+      name
+      color
+      product {
+        images {
+          url
+        }
+      }
+    }
+    ... on ProductSizeColorVariant {
+      id
+      name
+      color
+      size
+    }
+    ... on ProductSizeVariant {
+      id
+      name
+      size
+    }
+  }
 }`) as unknown as TypedDocumentString<ProductsGetByCollectionSlugQuery, ProductsGetByCollectionSlugQueryVariables>;
 export const ProductsGetByRelatedDocument = new TypedDocumentString(`
     query ProductsGetByRelated($name: String!) {
@@ -11101,6 +11221,30 @@ export const ProductsGetByRelatedDocument = new TypedDocumentString(`
     url
   }
   price
+  variants {
+    __typename
+    ... on ProductColorVariant {
+      id
+      name
+      color
+      product {
+        images {
+          url
+        }
+      }
+    }
+    ... on ProductSizeColorVariant {
+      id
+      name
+      color
+      size
+    }
+    ... on ProductSizeVariant {
+      id
+      name
+      size
+    }
+  }
 }`) as unknown as TypedDocumentString<ProductsGetByRelatedQuery, ProductsGetByRelatedQueryVariables>;
 export const ProductsGetListDocument = new TypedDocumentString(`
     query ProductsGetList($skip: Int, $first: Int) {
@@ -11119,4 +11263,28 @@ export const ProductsGetListDocument = new TypedDocumentString(`
     url
   }
   price
+  variants {
+    __typename
+    ... on ProductColorVariant {
+      id
+      name
+      color
+      product {
+        images {
+          url
+        }
+      }
+    }
+    ... on ProductSizeColorVariant {
+      id
+      name
+      color
+      size
+    }
+    ... on ProductSizeVariant {
+      id
+      name
+      size
+    }
+  }
 }`) as unknown as TypedDocumentString<ProductsGetListQuery, ProductsGetListQueryVariables>;
