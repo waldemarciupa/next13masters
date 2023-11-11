@@ -9,6 +9,13 @@ fragment ProductItem on Product {
 		url
 	}
 	price
+	reviews {
+		id
+		name
+		email
+		content
+		rating
+	}
 	variants {
 		__typename
 		... on ProductColorVariant {
