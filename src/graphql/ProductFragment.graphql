@@ -13,6 +13,7 @@ fragment ProductItem on Product {
 		id
 		name
 		email
+		headline
 		content
 		rating
 	}

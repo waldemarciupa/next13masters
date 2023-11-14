@@ -1,19 +1,22 @@
 import React from "react";
 
 interface ReviewItemProps {
-	reviews: {
-		id: string;
-		name: string;
-		email: string;
-		content: string;
-		rating: number;
-	}[];
+	reviews:
+		| {
+				id: string;
+				name: string;
+				email: string;
+				content: string;
+				rating: number;
+		  }[]
+		| number;
 }
 
 export const ReviewItem = ({ reviews }: ReviewItemProps) => {
-	const rating = +(
-		reviews.reduce((acc, review) => acc + review.rating, 0) / reviews.length
-	).toFixed(1);
+	const rating =
+		typeof reviews === "number"
+			? reviews
+			: +(reviews.reduce((acc, review) => acc + review.rating, 0) / reviews.length).toFixed(1);
 
 	const stars = Array.from({ length: 5 }, (_, i) => (
 		<svg

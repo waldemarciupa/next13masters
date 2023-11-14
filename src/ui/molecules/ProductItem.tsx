@@ -1,6 +1,7 @@
 import { revalidateTag } from "next/cache";
 import { Suspense } from "react";
 import Image from "next/image";
+import { ReviewList } from "./ReviewList";
 import { getProductById } from "@/api/products";
 import { ProductItemDescription } from "@/ui/atoms/ProductItemDescription";
 import { RelatedProductList } from "@/ui/organisms/RelatedProducts";
@@ -71,7 +72,7 @@ export const ProductItem = async ({ id }: ProductItemProps) => {
 			</Suspense>
 			<div className="lg:grid lg:grid-cols-12 lg:gap-x-8 lg:py-16">
 				<ReviewsForm />
-				<div className="mt-16  lg:col-span-7 lg:col-start-6 lg:mt-0">Reviews</div>
+				<ReviewList reviews={product.reviews} />
 			</div>
 		</div>
 	);

@@ -34,7 +34,7 @@ export type Aggregate = {
 };
 
 /** Asset system model */
-export type Asset = Node & {
+export type Asset = Entity & Node & {
   /** The time the document was created */
   createdAt: Scalars['DateTime']['output'];
   /** User that created this document */
@@ -738,7 +738,7 @@ export type BatchPayload = {
 };
 
 /** Category of products, e.g. Menswear. */
-export type Category = Node & {
+export type Category = Entity & Node & {
   /** The time the document was created */
   createdAt: Scalars['DateTime']['output'];
   /** User that created this document */
@@ -1325,7 +1325,7 @@ export type CategoryWhereUniqueInput = {
 };
 
 /** Collection of products, e.g. Winter Sale. */
-export type Collection = Node & {
+export type Collection = Entity & Node & {
   /** The time the document was created */
   createdAt: Scalars['DateTime']['output'];
   /** User that created this document */
@@ -1947,7 +1947,7 @@ export type ConnectPositionInput = {
   start?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
-export type Currency = Node & {
+export type Currency = Entity & Node & {
   code: Scalars['String']['output'];
   /** The time the document was created */
   createdAt: Scalars['DateTime']['output'];
@@ -2491,7 +2491,7 @@ export type Entity = {
   stage: Stage;
 };
 
-/** This enumeration holds all typenames that implement the Entity interface. Components implement the Entity interface. At the moment models are not supported, models are listed in this enum to avoid an empty enum without any components. */
+/** This enumeration holds all typenames that implement the Entity interface. Components and models implement the Entity interface. */
 export type EntityTypeName =
   /** Asset system model */
   | 'Asset'
@@ -2514,7 +2514,7 @@ export type EntityTypeName =
   /** User system model */
   | 'User';
 
-/** Allows to specify input to query components directly */
+/** Allows to specify input to query models and components directly */
 export type EntityWhereInput = {
   /** The ID of an object */
   id: Scalars['ID']['input'];
@@ -4537,7 +4537,7 @@ export type Node = {
   stage: Stage;
 };
 
-export type Order = Node & {
+export type Order = Entity & Node & {
   /** The time the document was created */
   createdAt: Scalars['DateTime']['output'];
   /** User that created this document */
@@ -4669,7 +4669,7 @@ export type OrderEdge = {
   node: Order;
 };
 
-export type OrderItem = Node & {
+export type OrderItem = Entity & Node & {
   /** The time the document was created */
   createdAt: Scalars['DateTime']['output'];
   /** User that created this document */
@@ -5555,7 +5555,7 @@ export type PageInfo = {
   startCursor?: Maybe<Scalars['String']['output']>;
 };
 
-export type Product = Node & {
+export type Product = Entity & Node & {
   categories: Array<Category>;
   collections: Array<Collection>;
   /** The time the document was created */
@@ -5739,7 +5739,7 @@ export type ProductColor =
   | 'PINK'
   | 'PURPLE';
 
-export type ProductColorVariant = Node & {
+export type ProductColorVariant = Entity & Node & {
   color: ProductColor;
   /** The time the document was created */
   createdAt: Scalars['DateTime']['output'];
@@ -6475,7 +6475,7 @@ export type ProductSize =
   | 'XL'
   | 'XS';
 
-export type ProductSizeColorVariant = Node & {
+export type ProductSizeColorVariant = Entity & Node & {
   color: ProductColor;
   /** The time the document was created */
   createdAt: Scalars['DateTime']['output'];
@@ -7023,7 +7023,7 @@ export type ProductSizeColorVariantWhereUniqueInput = {
   id?: InputMaybe<Scalars['ID']['input']>;
 };
 
-export type ProductSizeVariant = Node & {
+export type ProductSizeVariant = Entity & Node & {
   /** The time the document was created */
   createdAt: Scalars['DateTime']['output'];
   /** User that created this document */
@@ -8644,7 +8644,7 @@ export type RgbaInput = {
   r: Scalars['RGBAHue']['input'];
 };
 
-export type Review = Node & {
+export type Review = Entity & Node & {
   content: Scalars['String']['output'];
   /** The time the document was created */
   createdAt: Scalars['DateTime']['output'];
@@ -9262,7 +9262,7 @@ export type RichText = {
 };
 
 /** Scheduled Operation system model */
-export type ScheduledOperation = Node & {
+export type ScheduledOperation = Entity & Node & {
   affectedDocuments: Array<ScheduledOperationAffectedDocument>;
   /** The time the document was created */
   createdAt: Scalars['DateTime']['output'];
@@ -9692,7 +9692,7 @@ export type ScheduledOperationWhereUniqueInput = {
 };
 
 /** Scheduled Release system model */
-export type ScheduledRelease = Node & {
+export type ScheduledRelease = Entity & Node & {
   /** The time the document was created */
   createdAt: Scalars['DateTime']['output'];
   /** User that created this document */
@@ -10286,7 +10286,7 @@ export type UnpublishLocaleInput = {
 };
 
 /** User system model */
-export type User = Node & {
+export type User = Entity & Node & {
   /** The time the document was created */
   createdAt: Scalars['DateTime']['output'];
   /** Get the document in other stages */
@@ -10817,42 +10817,42 @@ export type CollectionsGetListQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type CollectionsGetListQuery = { collections: Array<{ id: string, slug: string, name: string, description?: string | null, image: { url: string } }> };
 
-export type ProductItemFragment = { id: string, name: string, description: string, price: number, categories: Array<{ name: string }>, images: Array<{ url: string }>, reviews: Array<{ id: string, name: string, email: string, content: string, rating: number }>, variants: Array<{ __typename: 'ProductColorVariant', id: string, name: string, color: ProductColor, product?: { images: Array<{ url: string }> } | null } | { __typename: 'ProductSizeColorVariant', id: string, name: string, color: ProductColor, size: ProductSize } | { __typename: 'ProductSizeVariant', id: string, name: string, size: ProductSize }> };
+export type ProductItemFragment = { id: string, name: string, description: string, price: number, categories: Array<{ name: string }>, images: Array<{ url: string }>, reviews: Array<{ id: string, name: string, email: string, headline: string, content: string, rating: number }>, variants: Array<{ __typename: 'ProductColorVariant', id: string, name: string, color: ProductColor, product?: { images: Array<{ url: string }> } | null } | { __typename: 'ProductSizeColorVariant', id: string, name: string, color: ProductColor, size: ProductSize } | { __typename: 'ProductSizeVariant', id: string, name: string, size: ProductSize }> };
 
 export type ProductGetByIdQueryVariables = Exact<{
   id: Scalars['ID']['input'];
 }>;
 
 
-export type ProductGetByIdQuery = { product?: { id: string, name: string, description: string, price: number, categories: Array<{ name: string }>, images: Array<{ url: string }>, reviews: Array<{ id: string, name: string, email: string, content: string, rating: number }>, variants: Array<{ __typename: 'ProductColorVariant', id: string, name: string, color: ProductColor, product?: { images: Array<{ url: string }> } | null } | { __typename: 'ProductSizeColorVariant', id: string, name: string, color: ProductColor, size: ProductSize } | { __typename: 'ProductSizeVariant', id: string, name: string, size: ProductSize }> } | null };
+export type ProductGetByIdQuery = { product?: { id: string, name: string, description: string, price: number, categories: Array<{ name: string }>, images: Array<{ url: string }>, reviews: Array<{ id: string, name: string, email: string, headline: string, content: string, rating: number }>, variants: Array<{ __typename: 'ProductColorVariant', id: string, name: string, color: ProductColor, product?: { images: Array<{ url: string }> } | null } | { __typename: 'ProductSizeColorVariant', id: string, name: string, color: ProductColor, size: ProductSize } | { __typename: 'ProductSizeVariant', id: string, name: string, size: ProductSize }> } | null };
 
 export type ProductGetBySearchQueryVariables = Exact<{
   searchQuery: Scalars['String']['input'];
 }>;
 
 
-export type ProductGetBySearchQuery = { products: Array<{ id: string, name: string, description: string, price: number, categories: Array<{ name: string }>, images: Array<{ url: string }>, reviews: Array<{ id: string, name: string, email: string, content: string, rating: number }>, variants: Array<{ __typename: 'ProductColorVariant', id: string, name: string, color: ProductColor, product?: { images: Array<{ url: string }> } | null } | { __typename: 'ProductSizeColorVariant', id: string, name: string, color: ProductColor, size: ProductSize } | { __typename: 'ProductSizeVariant', id: string, name: string, size: ProductSize }> }> };
+export type ProductGetBySearchQuery = { products: Array<{ id: string, name: string, description: string, price: number, categories: Array<{ name: string }>, images: Array<{ url: string }>, reviews: Array<{ id: string, name: string, email: string, headline: string, content: string, rating: number }>, variants: Array<{ __typename: 'ProductColorVariant', id: string, name: string, color: ProductColor, product?: { images: Array<{ url: string }> } | null } | { __typename: 'ProductSizeColorVariant', id: string, name: string, color: ProductColor, size: ProductSize } | { __typename: 'ProductSizeVariant', id: string, name: string, size: ProductSize }> }> };
 
 export type ProductsGetByCategorySlugQueryVariables = Exact<{
   slug: Scalars['String']['input'];
 }>;
 
 
-export type ProductsGetByCategorySlugQuery = { products: Array<{ id: string, name: string, description: string, price: number, categories: Array<{ name: string }>, images: Array<{ url: string }>, reviews: Array<{ id: string, name: string, email: string, content: string, rating: number }>, variants: Array<{ __typename: 'ProductColorVariant', id: string, name: string, color: ProductColor, product?: { images: Array<{ url: string }> } | null } | { __typename: 'ProductSizeColorVariant', id: string, name: string, color: ProductColor, size: ProductSize } | { __typename: 'ProductSizeVariant', id: string, name: string, size: ProductSize }> }> };
+export type ProductsGetByCategorySlugQuery = { products: Array<{ id: string, name: string, description: string, price: number, categories: Array<{ name: string }>, images: Array<{ url: string }>, reviews: Array<{ id: string, name: string, email: string, headline: string, content: string, rating: number }>, variants: Array<{ __typename: 'ProductColorVariant', id: string, name: string, color: ProductColor, product?: { images: Array<{ url: string }> } | null } | { __typename: 'ProductSizeColorVariant', id: string, name: string, color: ProductColor, size: ProductSize } | { __typename: 'ProductSizeVariant', id: string, name: string, size: ProductSize }> }> };
 
 export type ProductsGetByCollectionSlugQueryVariables = Exact<{
   slug: Scalars['String']['input'];
 }>;
 
 
-export type ProductsGetByCollectionSlugQuery = { products: Array<{ id: string, name: string, description: string, price: number, categories: Array<{ name: string }>, images: Array<{ url: string }>, reviews: Array<{ id: string, name: string, email: string, content: string, rating: number }>, variants: Array<{ __typename: 'ProductColorVariant', id: string, name: string, color: ProductColor, product?: { images: Array<{ url: string }> } | null } | { __typename: 'ProductSizeColorVariant', id: string, name: string, color: ProductColor, size: ProductSize } | { __typename: 'ProductSizeVariant', id: string, name: string, size: ProductSize }> }> };
+export type ProductsGetByCollectionSlugQuery = { products: Array<{ id: string, name: string, description: string, price: number, categories: Array<{ name: string }>, images: Array<{ url: string }>, reviews: Array<{ id: string, name: string, email: string, headline: string, content: string, rating: number }>, variants: Array<{ __typename: 'ProductColorVariant', id: string, name: string, color: ProductColor, product?: { images: Array<{ url: string }> } | null } | { __typename: 'ProductSizeColorVariant', id: string, name: string, color: ProductColor, size: ProductSize } | { __typename: 'ProductSizeVariant', id: string, name: string, size: ProductSize }> }> };
 
 export type ProductsGetByRelatedQueryVariables = Exact<{
   name: Scalars['String']['input'];
 }>;
 
 
-export type ProductsGetByRelatedQuery = { products: Array<{ id: string, name: string, description: string, price: number, categories: Array<{ name: string }>, images: Array<{ url: string }>, reviews: Array<{ id: string, name: string, email: string, content: string, rating: number }>, variants: Array<{ __typename: 'ProductColorVariant', id: string, name: string, color: ProductColor, product?: { images: Array<{ url: string }> } | null } | { __typename: 'ProductSizeColorVariant', id: string, name: string, color: ProductColor, size: ProductSize } | { __typename: 'ProductSizeVariant', id: string, name: string, size: ProductSize }> }> };
+export type ProductsGetByRelatedQuery = { products: Array<{ id: string, name: string, description: string, price: number, categories: Array<{ name: string }>, images: Array<{ url: string }>, reviews: Array<{ id: string, name: string, email: string, headline: string, content: string, rating: number }>, variants: Array<{ __typename: 'ProductColorVariant', id: string, name: string, color: ProductColor, product?: { images: Array<{ url: string }> } | null } | { __typename: 'ProductSizeColorVariant', id: string, name: string, color: ProductColor, size: ProductSize } | { __typename: 'ProductSizeVariant', id: string, name: string, size: ProductSize }> }> };
 
 export type ProductsGetListQueryVariables = Exact<{
   skip?: InputMaybe<Scalars['Int']['input']>;
@@ -10860,7 +10860,7 @@ export type ProductsGetListQueryVariables = Exact<{
 }>;
 
 
-export type ProductsGetListQuery = { products: Array<{ id: string, name: string, description: string, price: number, categories: Array<{ name: string }>, images: Array<{ url: string }>, reviews: Array<{ id: string, name: string, email: string, content: string, rating: number }>, variants: Array<{ __typename: 'ProductColorVariant', id: string, name: string, color: ProductColor, product?: { images: Array<{ url: string }> } | null } | { __typename: 'ProductSizeColorVariant', id: string, name: string, color: ProductColor, size: ProductSize } | { __typename: 'ProductSizeVariant', id: string, name: string, size: ProductSize }> }> };
+export type ProductsGetListQuery = { products: Array<{ id: string, name: string, description: string, price: number, categories: Array<{ name: string }>, images: Array<{ url: string }>, reviews: Array<{ id: string, name: string, email: string, headline: string, content: string, rating: number }>, variants: Array<{ __typename: 'ProductColorVariant', id: string, name: string, color: ProductColor, product?: { images: Array<{ url: string }> } | null } | { __typename: 'ProductSizeColorVariant', id: string, name: string, color: ProductColor, size: ProductSize } | { __typename: 'ProductSizeVariant', id: string, name: string, size: ProductSize }> }> };
 
 export class TypedDocumentString<TResult, TVariables>
   extends String
@@ -10919,6 +10919,7 @@ export const ProductItemFragmentDoc = new TypedDocumentString(`
     id
     name
     email
+    headline
     content
     rating
   }
@@ -11064,6 +11065,7 @@ export const ProductGetByIdDocument = new TypedDocumentString(`
     id
     name
     email
+    headline
     content
     rating
   }
@@ -11113,6 +11115,7 @@ export const ProductGetBySearchDocument = new TypedDocumentString(`
     id
     name
     email
+    headline
     content
     rating
   }
@@ -11162,6 +11165,7 @@ export const ProductsGetByCategorySlugDocument = new TypedDocumentString(`
     id
     name
     email
+    headline
     content
     rating
   }
@@ -11211,6 +11215,7 @@ export const ProductsGetByCollectionSlugDocument = new TypedDocumentString(`
     id
     name
     email
+    headline
     content
     rating
   }
@@ -11260,6 +11265,7 @@ export const ProductsGetByRelatedDocument = new TypedDocumentString(`
     id
     name
     email
+    headline
     content
     rating
   }
@@ -11309,6 +11315,7 @@ export const ProductsGetListDocument = new TypedDocumentString(`
     id
     name
     email
+    headline
     content
     rating
   }
