@@ -17,6 +17,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 	const product = await getProductById(id);
 
 	return {
+		metadataBase: new URL("http://localhost:3000"),
 		title: product.name,
 		description: product.description,
 		openGraph: {
