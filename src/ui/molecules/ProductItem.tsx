@@ -71,7 +71,7 @@ export const ProductItem = async ({ id }: ProductItemProps) => {
 				<RelatedProductList product={product} />
 			</Suspense>
 			<div className="lg:grid lg:grid-cols-12 lg:gap-x-8 lg:py-16">
-				<ReviewsForm />
+				<ReviewsForm productId={product.id} />
 				<ReviewList reviews={product.reviews} />
 			</div>
 		</div>

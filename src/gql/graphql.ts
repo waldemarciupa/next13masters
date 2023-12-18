@@ -2518,6 +2518,7 @@ export type EntityTypeName =
 export type EntityWhereInput = {
   /** The ID of an object */
   id: Scalars['ID']['input'];
+  locale?: InputMaybe<Locale>;
   stage: Stage;
   /** The Type name of an object */
   typename: EntityTypeName;
@@ -10862,6 +10863,13 @@ export type ProductsGetListQueryVariables = Exact<{
 
 export type ProductsGetListQuery = { products: Array<{ id: string, name: string, description: string, price: number, categories: Array<{ name: string }>, images: Array<{ url: string }>, reviews: Array<{ id: string, name: string, email: string, headline: string, content: string, rating: number }>, variants: Array<{ __typename: 'ProductColorVariant', id: string, name: string, color: ProductColor, product?: { images: Array<{ url: string }> } | null } | { __typename: 'ProductSizeColorVariant', id: string, name: string, color: ProductColor, size: ProductSize } | { __typename: 'ProductSizeVariant', id: string, name: string, size: ProductSize }> }> };
 
+export type ReviewCreateMutationVariables = Exact<{
+  data: ReviewCreateInput;
+}>;
+
+
+export type ReviewCreateMutation = { createReview?: { id: string, name: string, headline: string, email: string, content: string, rating: number } | null };
+
 export class TypedDocumentString<TResult, TVariables>
   extends String
   implements DocumentTypeDecoration<TResult, TVariables>
@@ -11344,3 +11352,15 @@ export const ProductsGetListDocument = new TypedDocumentString(`
     }
   }
 }`) as unknown as TypedDocumentString<ProductsGetListQuery, ProductsGetListQueryVariables>;
+export const ReviewCreateDocument = new TypedDocumentString(`
+    mutation ReviewCreate($data: ReviewCreateInput!) {
+  createReview(data: $data) {
+    id
+    name
+    headline
+    email
+    content
+    rating
+  }
+}
+    `) as unknown as TypedDocumentString<ReviewCreateMutation, ReviewCreateMutationVariables>;
