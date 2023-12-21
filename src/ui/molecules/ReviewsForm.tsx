@@ -1,6 +1,7 @@
 "use client";
 
 import { useFormState, useFormStatus } from "react-dom";
+import { useRef } from "react";
 import { addReview } from "@/app/review/actions";
 import { ReviewHeadline } from "@/ui/atoms/ReviewHeadline";
 import { ReviewInput } from "@/ui/atoms/ReviewInput";
@@ -9,6 +10,7 @@ import { ReviewRating } from "@/ui/molecules/ReviewRating";
 export const ReviewsForm = ({ productId }: { productId: string }) => {
 	const { pending } = useFormStatus();
 	const [state, formAction] = useFormState(addReview, null);
+	const ref = useRef<HTMLFormElement>(null);
 
 	return (
 		<div className=" lg:col-span-4">
@@ -17,7 +19,11 @@ export const ReviewsForm = ({ productId }: { productId: string }) => {
 				If you’ve used this product, share your thoughts with other customers
 			</p>
 			<form
-				action={formAction}
+				ref={ref}
+				action={(payload: FormData) => {
+					formAction(payload);
+					ref.current?.reset();
+				}}
 				data-testid="add-review-form"
 				className="mt-2 flex flex-col gap-y-2"
 			>
