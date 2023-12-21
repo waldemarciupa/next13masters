@@ -16,7 +16,7 @@ export async function addReview(currentState: unknown, formData: FormData) {
 
 	try {
 		await createReview(data);
-		revalidatePath("/prducts/[productId]");
+		revalidatePath("/product/[id]", "page");
 	} catch (error) {
 		return "Failed to add review";
 	}
