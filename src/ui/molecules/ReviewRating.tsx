@@ -6,8 +6,8 @@ export const ReviewRating = () => {
 		/* TODO: Implement rating */
 	}
 	return (
-		<div>
-			<ReviewHeadline>Rating</ReviewHeadline>
+		<div className="mb-4">
+			<ReviewHeadline htmlFor="rating">Rating</ReviewHeadline>
 			<fieldset className="flex gap-x-2">
 				<label htmlFor="rating-1">
 					<Star color="grey" strokeWidth={1} />
