@@ -2,12 +2,12 @@ import { revalidateTag } from "next/cache";
 import { Suspense } from "react";
 import Image from "next/image";
 import { ReviewList } from "./ReviewList";
+import { ReviewAside } from "./ReviewAside";
 import { getProductById } from "@/api/products";
 import { ProductItemDescription } from "@/ui/atoms/ProductItemDescription";
 import { RelatedProductList } from "@/ui/organisms/RelatedProducts";
 import { AddToCartButton } from "@/ui/atoms/AddToCartButton";
 import { getOrCreateCart, addToCart } from "@/api/cart";
-import { ReviewsForm } from "@/ui/molecules/ReviewsForm";
 
 type ProductItemProps = {
 	id: string;
@@ -71,7 +71,7 @@ export const ProductItem = async ({ id }: ProductItemProps) => {
 				<RelatedProductList product={product} />
 			</Suspense>
 			<div className="lg:grid lg:grid-cols-12 lg:gap-x-8 lg:py-16">
-				<ReviewsForm productId={product.id} />
+				<ReviewAside productId={product.id} />
 				<ReviewList reviews={product.reviews} />
 			</div>
 		</div>
