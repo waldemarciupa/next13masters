@@ -44,7 +44,8 @@ export const ReviewsForm = ({ productId }: { productId: string }) => {
 				<ErrorHelperText>{state?.errors && state?.errors?.fieldErrors?.email}</ErrorHelperText>
 			</div>
 			<SubmitButton />
-			<ErrorHelperText>{state?.message && state?.message}</ErrorHelperText>
+			{state?.success && <div className="text-green-500">Review added successfully</div>}
+			{state?.error && <ErrorHelperText>{state?.error}</ErrorHelperText>}
 		</form>
 	);
 };
