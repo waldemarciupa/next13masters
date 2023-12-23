@@ -26,28 +26,22 @@ export const ReviewsForm = ({ productId }: { productId: string }) => {
 			<div>
 				<ReviewHeadline htmlFor="headline">Review title</ReviewHeadline>
 				<ReviewInput name="headline" type="text" />
-				<ErrorHelperText>
-					{state?.fieldErrors?.headline && state?.fieldErrors?.headline[0]}
-				</ErrorHelperText>
+				<ErrorHelperText>{state?.errors && state?.errors?.fieldErrors?.headline}</ErrorHelperText>
 			</div>
 			<div>
 				<ReviewHeadline htmlFor="content">Review content</ReviewHeadline>
 				<ReviewInput name="content" type="textarea" />
-				<ErrorHelperText>
-					{state?.fieldErrors?.content && state?.fieldErrors?.content[0]}
-				</ErrorHelperText>
+				<ErrorHelperText>{state?.errors && state?.errors?.fieldErrors?.content}</ErrorHelperText>
 			</div>
 			<div>
 				<ReviewHeadline htmlFor="name">Name</ReviewHeadline>
 				<ReviewInput name="name" type="text" />
-				<ErrorHelperText>{state?.fieldErrors?.name && state?.fieldErrors?.name[0]}</ErrorHelperText>
+				<ErrorHelperText>{state?.errors && state?.errors?.fieldErrors?.name}</ErrorHelperText>
 			</div>
 			<div>
 				<ReviewHeadline htmlFor="email">Email</ReviewHeadline>
 				<ReviewInput name="email" type="email" />
-				<ErrorHelperText>
-					{state?.fieldErrors?.email && state?.fieldErrors?.email[0]}
-				</ErrorHelperText>
+				<ErrorHelperText>{state?.errors && state?.errors?.fieldErrors?.email}</ErrorHelperText>
 			</div>
 			<SubmitButton />
 			<ErrorHelperText>{state?.message && state?.message}</ErrorHelperText>

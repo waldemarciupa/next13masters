@@ -13,7 +13,7 @@ const schema = z.object({
 	rating: z.number().int().min(1).max(5),
 });
 
-export async function addReview(currentState: unknown, formData: FormData) {
+export async function addReview(_currentState: unknown, formData: FormData) {
 	const validatedFields = schema.safeParse({
 		content: formData.get("content") as string,
 		email: formData.get("email") as string,
@@ -24,7 +24,7 @@ export async function addReview(currentState: unknown, formData: FormData) {
 	});
 
 	if (!validatedFields.success) {
-		return validatedFields.error.flatten();
+		return { errors: validatedFields.error.flatten() };
 	} else {
 		const data = validatedFields.data as ReviewCreateInput;
 
