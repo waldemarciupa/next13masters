@@ -8,7 +8,10 @@ export const ReviewFormField = ({ htmlFor, title, name, type, state }: ReviewFor
 		<div>
 			<ReviewHeadline htmlFor={htmlFor}>{title}</ReviewHeadline>
 			<ReviewInput name={name} type={type} />
-			<ErrorHelperText>{state?.errors && state?.errors?.fieldErrors?.email}</ErrorHelperText>
+			<ErrorHelperText>
+				{state?.errors &&
+					state?.errors?.fieldErrors?.[name as keyof (typeof state)["errors"]["fieldErrors"]]}
+			</ErrorHelperText>
 		</div>
 	);
 };
