@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useFormState } from "react-dom";
 import { ReviewButton as SubmitButton } from "../atoms/ReviewButton";
 import { ErrorHelperText } from "../atoms/ErrorHelperText";
@@ -9,8 +9,19 @@ import { ReviewFormField } from "./ReviewFormField";
 import { addReview } from "@/app/review/actions";
 
 export const ReviewsForm = ({ productId }: { productId: string }) => {
+	const [isVisible, setIsVisible] = useState(false);
 	const [state, formAction] = useFormState(addReview, null);
 	const ref = useRef<HTMLFormElement>(null);
+
+	useEffect(() => {
+		if (state?.success) {
+			setIsVisible(true);
+			ref.current?.reset();
+			setTimeout(() => {
+				setIsVisible(false);
+			}, 3000);
+		}
+	}, [state?.success]);
 
 	return (
 		<form
@@ -25,7 +36,9 @@ export const ReviewsForm = ({ productId }: { productId: string }) => {
 				<ReviewFormField key={field.name} {...field} state={state} />
 			))}
 			<SubmitButton />
-			{state?.success && <div className="text-green-500">Review added successfully</div>}
+			{state?.success && isVisible && (
+				<div className="text-green-500">Review added successfully</div>
+			)}
 			{state?.error && <ErrorHelperText>{state?.error}</ErrorHelperText>}
 		</form>
 	);
