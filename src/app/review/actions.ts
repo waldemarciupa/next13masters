@@ -2,7 +2,7 @@
 import { z } from "zod";
 import { revalidatePath } from "next/cache";
 import { type ReviewCreateInput } from "@/gql/graphql";
-import { createReview } from "@/api/review";
+import { createReview, publishReview } from "@/api/review";
 
 const schema = z.object({
 	content: z.string().min(3, { message: "Content must be 3 or more character long" }).max(300),
@@ -29,7 +29,11 @@ export async function addReview(_currentState: unknown, formData: FormData) {
 		const data = validatedFields.data as ReviewCreateInput;
 
 		try {
-			await createReview(data);
+			const review = await createReview(data);
+			if (!review) {
+				return { error: "Failed to add review" };
+			}
+			await publishReview(review.id);
 			revalidatePath("/product/[id]", "page");
 			return { success: "Review added" };
 		} catch (error) {

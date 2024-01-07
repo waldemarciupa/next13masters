@@ -1,5 +1,5 @@
 import { executeGraphql } from "./executeGraphql";
-import { ReviewCreateDocument, type ReviewCreateInput } from "@/gql/graphql";
+import { ReviewCreateDocument, ReviewPublishDocument, type ReviewCreateInput } from "@/gql/graphql";
 
 export const createReview = async (review: ReviewCreateInput) => {
 	const graphqlResponse = await executeGraphql({
@@ -7,4 +7,12 @@ export const createReview = async (review: ReviewCreateInput) => {
 		variables: { data: review },
 	});
 	return graphqlResponse.createReview;
+};
+
+export const publishReview = async (id: string) => {
+	const graphqlResponse = await executeGraphql({
+		query: ReviewPublishDocument,
+		variables: { id },
+	});
+	return graphqlResponse.publishReview;
 };
