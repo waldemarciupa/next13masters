@@ -6,7 +6,7 @@ export const ReviewRating = () => {
 	const [rating, setRating] = useState(0);
 
 	return (
-		<div className="mb-4">
+		<div>
 			<ReviewHeadline htmlFor="rating">Rating</ReviewHeadline>
 			<fieldset className="flex gap-x-2">
 				{[1, 2, 3, 4, 5].map((r) => (
