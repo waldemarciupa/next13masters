@@ -32,6 +32,9 @@ export const ReviewsForm = ({ productId }: { productId: string }) => {
 		>
 			<input type="hidden" name="productId" value={productId} />
 			<ReviewRating />
+			<ErrorHelperText>
+				{state?.errors?.fieldErrors?.rating && state?.errors?.fieldErrors?.rating}
+			</ErrorHelperText>
 			{fields.map((field) => (
 				<ReviewFormField key={field.name} {...field} state={state} />
 			))}
