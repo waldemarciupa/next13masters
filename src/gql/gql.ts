@@ -31,6 +31,7 @@ const documents = {
     "query ProductsGetByRelated($name: String!) {\n  products(first: 4, where: {categories_every: {name_not: $name}}) {\n    ...ProductItem\n  }\n}": types.ProductsGetByRelatedDocument,
     "query ProductsGetList($skip: Int, $first: Int) {\n  products(skip: $skip, first: $first) {\n    ...ProductItem\n  }\n}": types.ProductsGetListDocument,
     "mutation ReviewCreate($data: ReviewCreateInput!) {\n  createReview(data: $data) {\n    id\n    name\n    headline\n    email\n    content\n    rating\n  }\n}": types.ReviewCreateDocument,
+    "mutation ReviewPublish($id: ID!) {\n  publishReview(where: {id: $id}, to: PUBLISHED) {\n    id\n  }\n}": types.ReviewPublishDocument,
 };
 
 /**
@@ -101,6 +102,10 @@ export function graphql(source: "query ProductsGetList($skip: Int, $first: Int) 
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "mutation ReviewCreate($data: ReviewCreateInput!) {\n  createReview(data: $data) {\n    id\n    name\n    headline\n    email\n    content\n    rating\n  }\n}"): typeof import('./graphql').ReviewCreateDocument;
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "mutation ReviewPublish($id: ID!) {\n  publishReview(where: {id: $id}, to: PUBLISHED) {\n    id\n  }\n}"): typeof import('./graphql').ReviewPublishDocument;
 
 
 export function graphql(source: string) {

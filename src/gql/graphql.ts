@@ -10870,6 +10870,13 @@ export type ReviewCreateMutationVariables = Exact<{
 
 export type ReviewCreateMutation = { createReview?: { id: string, name: string, headline: string, email: string, content: string, rating: number } | null };
 
+export type ReviewPublishMutationVariables = Exact<{
+  id: Scalars['ID']['input'];
+}>;
+
+
+export type ReviewPublishMutation = { publishReview?: { id: string } | null };
+
 export class TypedDocumentString<TResult, TVariables>
   extends String
   implements DocumentTypeDecoration<TResult, TVariables>
@@ -11364,3 +11371,10 @@ export const ReviewCreateDocument = new TypedDocumentString(`
   }
 }
     `) as unknown as TypedDocumentString<ReviewCreateMutation, ReviewCreateMutationVariables>;
+export const ReviewPublishDocument = new TypedDocumentString(`
+    mutation ReviewPublish($id: ID!) {
+  publishReview(where: {id: $id}, to: PUBLISHED) {
+    id
+  }
+}
+    `) as unknown as TypedDocumentString<ReviewPublishMutation, ReviewPublishMutationVariables>;
