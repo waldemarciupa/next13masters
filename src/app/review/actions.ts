@@ -10,7 +10,7 @@ const schema = z.object({
 	headline: z.string().min(3, { message: "Headline must be 3 or more character long" }).max(100),
 	name: z.string().min(3, { message: "Name must be 3 or more character long" }).max(100),
 	product: z.object({ connect: z.object({ id: z.string() }) }),
-	rating: z.number().int().min(1).max(5),
+	rating: z.number().int().min(1, { message: "Rating required" }).max(5),
 });
 
 export async function addReview(_currentState: unknown, formData: FormData) {
