@@ -20,7 +20,7 @@ export async function addReview(_currentState: unknown, formData: FormData) {
 		headline: formData.get("headline") as string,
 		name: formData.get("name") as string,
 		product: { connect: { id: formData.get("productId") as string } },
-		rating: formData.get("rating"),
+		rating: Number(formData.get("rating")),
 	});
 
 	if (!validatedFields.success) {
