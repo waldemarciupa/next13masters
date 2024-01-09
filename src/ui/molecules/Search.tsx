@@ -1,25 +1,21 @@
 "use client";
 import { Search as LucideSearch } from "lucide-react";
-import { useState, useEffect } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 
 export const Search = () => {
+	const searchParams = useSearchParams();
 	const router = useRouter();
-	const [searchParams] = useSearchParams();
-	const [searchQuery, setSearchQuery] = useState("");
 
-	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		setSearchQuery(e.target.value);
-	};
-
-	useEffect(() => {
-		if (searchQuery) {
-			const timer = setTimeout(() => {
-				router.push(`/search?query=${searchQuery}`);
-			}, 500);
-			return () => clearTimeout(timer);
+	const handleSearch = (term: string) => {
+		const params = new URLSearchParams(searchParams);
+		if (term) {
+			params.set("query", term);
+			router.push(`/search?${params.toString()}`);
+		} else {
+			params.delete("query");
+			router.push(`/`);
 		}
-	}, [router, searchParams, searchQuery]);
+	};
 
 	return (
 		<div>
@@ -35,8 +31,7 @@ export const Search = () => {
 					name="search"
 					placeholder="Search"
 					className="w-10 min-w-[10rem] rounded-md border-0 bg-slate-50 py-2 pl-11 pr-4 text-sm text-slate-800 ring-1 ring-inset ring-gray-300 placeholder:text-slate-400 focus:ring-2 focus:ring-inset focus:ring-blue-400 sm:w-full sm:min-w-full"
-					value={searchQuery}
-					onChange={handleInputChange}
+					onChange={(e) => handleSearch(e.target.value)}
 				/>
 			</div>
 		</div>

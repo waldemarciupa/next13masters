@@ -8,7 +8,7 @@ type SearchParams = {
 };
 
 export default async function Page({ searchParams }: { searchParams: SearchParams }) {
-	const products = await getProductsBySearch(searchParams.query.trim());
+	const products = await getProductsBySearch(searchParams?.query?.trim());
 
 	return (
 		<div>
