@@ -1,10 +1,13 @@
-import { useState } from "react";
 import { ReviewStar } from "./ReviewStar";
 import { ReviewHeadline } from "@/ui/atoms/ReviewHeadline";
 
-export const ReviewRating = () => {
-	const [rating, setRating] = useState(0);
-
+export const ReviewRating = ({
+	rating,
+	setRating,
+}: {
+	rating: number;
+	setRating: (r: number) => void;
+}) => {
 	return (
 		<div>
 			<ReviewHeadline htmlFor="rating">Rating</ReviewHeadline>

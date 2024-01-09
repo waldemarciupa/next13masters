@@ -10,6 +10,7 @@ import { addReview } from "@/app/review/actions";
 
 export const ReviewsForm = ({ productId }: { productId: string }) => {
 	const [isVisible, setIsVisible] = useState(false);
+	const [rating, setRating] = useState(0);
 	const [state, formAction] = useFormState(addReview, null);
 	const ref = useRef<HTMLFormElement>(null);
 
@@ -17,6 +18,7 @@ export const ReviewsForm = ({ productId }: { productId: string }) => {
 		if (state?.success) {
 			setIsVisible(true);
 			ref.current?.reset();
+			setRating(0);
 			setTimeout(() => {
 				setIsVisible(false);
 			}, 3000);
@@ -31,7 +33,7 @@ export const ReviewsForm = ({ productId }: { productId: string }) => {
 			className="mt-4 flex flex-col"
 		>
 			<input type="hidden" name="productId" value={productId} />
-			<ReviewRating />
+			<ReviewRating rating={rating} setRating={setRating} />
 			<ErrorHelperText>
 				{state?.errors?.fieldErrors?.rating && state?.errors?.fieldErrors?.rating}
 			</ErrorHelperText>
