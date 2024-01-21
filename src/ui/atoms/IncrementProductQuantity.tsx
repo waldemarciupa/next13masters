@@ -12,29 +12,33 @@ export const IncrementProductQuantity = ({
 	const [optimisticQuantity, setOptimisticQuantity] = useOptimistic(quantity);
 
 	return (
-		<form>
+		<form className="mt-8">
 			{/* TODO: quantity */}
-			<button
-				data-testid="decrement"
-				className="ml-2 h-8 w-8 border bg-slate-50 "
-				formAction={async () => {
-					setOptimisticQuantity(optimisticQuantity - 1);
-					await changeItemQuantity(itemId, optimisticQuantity - 1);
-				}}
-			>
-				-
-			</button>
-			<span data-testid="quantity">{optimisticQuantity}</span>
-			<button
-				data-testid="increment"
-				className="ml-2 h-8 w-8 border bg-slate-50 "
-				formAction={async () => {
-					setOptimisticQuantity(optimisticQuantity + 1);
-					await changeItemQuantity(itemId, optimisticQuantity + 1);
-				}}
-			>
-				+
-			</button>
+			<div className="flex">
+				<button
+					data-testid="decrement"
+					className="h-6 w-6 border"
+					formAction={async () => {
+						setOptimisticQuantity(optimisticQuantity - 1);
+						await changeItemQuantity(itemId, optimisticQuantity - 1);
+					}}
+				>
+					-
+				</button>
+				<span className="w-8 text-center" data-testid="quantity">
+					{optimisticQuantity}
+				</span>
+				<button
+					data-testid="increment"
+					className="h-6 w-6 border"
+					formAction={async () => {
+						setOptimisticQuantity(optimisticQuantity + 1);
+						await changeItemQuantity(itemId, optimisticQuantity + 1);
+					}}
+				>
+					+
+				</button>
+			</div>
 		</form>
 	);
 };
