@@ -1,0 +1,8 @@
+mutation CartDeleteOrderItem($orderId: ID!, $orderItemId: ID!, $total: Int!) {
+	updateOrder(
+		where: { id: $orderId }
+		data: { total: $total, orderItems: { delete: { id: $orderItemId } } }
+	) {
+		id
+	}
+}
