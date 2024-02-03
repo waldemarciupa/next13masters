@@ -1,9 +1,16 @@
 import Image from "next/image";
 import { IncrementProductQuantity } from "../atoms/IncrementProductQuantity";
+import { CartRemoveItemButton as RemoveItem } from "../atoms/CartRemoveItemButton";
 import { type OrderItem } from "@/gql/graphql";
 import { formatPrice } from "@/utils";
 
-export const CartItem = ({ item }: { item: OrderItem }) => {
+type CartItemProps = {
+	orderId: string;
+	item: OrderItem;
+	total: number;
+};
+
+export const CartItem = ({ orderId, item, total }: CartItemProps) => {
 	return (
 		<li className="flex py-4">
 			<div className="flex-shrink-0 rounded-md border bg-slate-50">
@@ -20,7 +27,12 @@ export const CartItem = ({ item }: { item: OrderItem }) => {
 					<div>
 						<h3 className="text-sm font-medium text-gray-900">{item?.product?.name}</h3>
 						<IncrementProductQuantity quantity={item?.quantity ?? 0} itemId={item?.id} />
-						<button className="mt-4 text-sm font-medium text-slate-900 underline">Remove</button>
+						<RemoveItem
+							orderId={orderId}
+							orderItemId={item?.id}
+							itemTotal={item?.total}
+							total={total}
+						/>
 					</div>
 					<p className="small-caps mt-1 p-4 text-right text-sm  font-semibold  text-slate-900">
 						{formatPrice((item?.product?.price ?? 0) / 100)}
