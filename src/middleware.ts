@@ -1,9 +1,7 @@
-import { NextResponse, type NextRequest } from "next/server";
+import { authMiddleware } from "@clerk/nextjs";
 
-export function middleware(request: NextRequest) {
-	return NextResponse.redirect(new URL("/products/1", request.url));
-}
+export default authMiddleware({});
 
 export const config = {
-	matcher: "/products",
+	matcher: ["/((?!.+\\.[\\w]+$|_next).*)", "/", "/(api|trpc)(.*)"],
 };
