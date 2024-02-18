@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ShoppingBag } from "lucide-react";
 import { type Route } from "next";
+import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 import { ActiveLink } from "@/ui/atoms/ActiveLink";
 import { Search } from "@/ui/molecules/Search";
 import { getCartByCookieId } from "@/api/cart";
@@ -37,6 +38,12 @@ export const Navigation = async () => {
 						<span className="ml-2 text-sm font-medium ">{quantity}</span>
 					</div>
 				</Link>
+				<SignedIn>
+					<UserButton userProfileMode="navigation" />
+				</SignedIn>
+				<SignedOut>
+					<SignInButton />
+				</SignedOut>
 			</div>
 		</div>
 	);
