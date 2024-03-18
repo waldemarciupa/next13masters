@@ -79,7 +79,8 @@
 				"name": "next/router",
 				"message": "Please use `next/navigation` instead"
 			}
-		]
+		],
+		"no-console": "warn"
 	},
 	"overrides": [
 		{
