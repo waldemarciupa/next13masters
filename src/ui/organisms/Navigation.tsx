@@ -18,7 +18,7 @@ export const Navigation = async () => {
 	const cart = await getCartByCookieId();
 	const quantity = cart?.orderItems.length || 0;
 	return (
-		<div className="mx-auto flex h-20 items-center justify-between overflow-x-scroll px-4 sm:h-16 sm:overflow-x-auto sm:px-8">
+		<header className="mx-auto flex h-20 w-full items-center justify-between overflow-x-scroll px-4 sm:h-16 sm:overflow-x-auto sm:px-8">
 			<nav>
 				<ul className="flex text-zinc-950">
 					{navLinks.map(({ href, label }) => (
@@ -45,6 +45,6 @@ export const Navigation = async () => {
 					<SignInButton />
 				</SignedOut>
 			</div>
-		</div>
+		</header>
 	);
 };
