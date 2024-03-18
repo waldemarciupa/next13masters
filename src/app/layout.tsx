@@ -2,7 +2,9 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
+import clsx from "clsx";
 import { Navigation } from "@/ui/organisms/Navigation";
+import { Footer } from "@/ui/organisms/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,10 +16,11 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
 		<html lang="en">
-			<body className={inter.className}>
+			<body className={clsx(inter.className, "flex min-h-screen flex-col")}>
 				<ClerkProvider>
 					<Navigation />
-					{children}
+					<main className="flex-grow">{children}</main>
+					<Footer />
 				</ClerkProvider>
 			</body>
 		</html>
