@@ -1,5 +1,6 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
 import { executeGraphql } from "@/api/executeGraphql";
 import { CartDeleteOrderItemDocument, CartSetProductQuantityDocument } from "@/gql/graphql";
 
@@ -17,8 +18,8 @@ export const removeItem = (
 	});
 };
 
-export const changeItemQuantity = (itemId: string, quantity: number) => {
-	return executeGraphql({
+export const changeItemQuantity = async (itemId: string, quantity: number) => {
+	await executeGraphql({
 		query: CartSetProductQuantityDocument,
 		variables: { itemId, quantity },
 		cache: "no-store",
@@ -26,4 +27,6 @@ export const changeItemQuantity = (itemId: string, quantity: number) => {
 			tags: ["cart"],
 		},
 	});
+
+	revalidatePath("/cart");
 };
