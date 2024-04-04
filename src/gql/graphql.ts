@@ -8254,6 +8254,7 @@ export type QueryCurrencyVersionArgs = {
 
 
 export type QueryEntitiesArgs = {
+  locales?: InputMaybe<Array<Locale>>;
   where: Array<EntityWhereInput>;
 };
 
@@ -10808,10 +10809,11 @@ export type CartRemoveProductMutation = { deleteOrderItem?: { id: string } | nul
 export type CartSetProductQuantityMutationVariables = Exact<{
   itemId: Scalars['ID']['input'];
   quantity: Scalars['Int']['input'];
+  total: Scalars['Int']['input'];
 }>;
 
 
-export type CartSetProductQuantityMutation = { updateOrderItem?: { id: string, quantity: number } | null };
+export type CartSetProductQuantityMutation = { updateOrderItem?: { id: string, quantity: number, total: number } | null };
 
 export type CollectionItemFragment = { id: string, slug: string, name: string, description?: string | null, image: { url: string } };
 
@@ -11050,10 +11052,14 @@ export const CartRemoveProductDocument = new TypedDocumentString(`
 }
     `) as unknown as TypedDocumentString<CartRemoveProductMutation, CartRemoveProductMutationVariables>;
 export const CartSetProductQuantityDocument = new TypedDocumentString(`
-    mutation CartSetProductQuantity($itemId: ID!, $quantity: Int!) {
-  updateOrderItem(where: {id: $itemId}, data: {quantity: $quantity}) {
+    mutation CartSetProductQuantity($itemId: ID!, $quantity: Int!, $total: Int!) {
+  updateOrderItem(
+    where: {id: $itemId}
+    data: {quantity: $quantity, total: $total}
+  ) {
     id
     quantity
+    total
   }
 }
     `) as unknown as TypedDocumentString<CartSetProductQuantityMutation, CartSetProductQuantityMutationVariables>;
