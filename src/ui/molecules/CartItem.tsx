@@ -26,7 +26,7 @@ export const CartItem = ({ orderId, item, total }: CartItemProps) => {
 				<div className="flex justify-between">
 					<div>
 						<h3 className="text-sm font-medium text-gray-900">{item?.product?.name}</h3>
-						<IncrementProductQuantity quantity={item?.quantity ?? 0} itemId={item?.id} />
+						<IncrementProductQuantity item={item} />
 						<RemoveItem
 							orderId={orderId}
 							orderItemId={item?.id}
@@ -35,7 +35,7 @@ export const CartItem = ({ orderId, item, total }: CartItemProps) => {
 						/>
 					</div>
 					<p className="small-caps mt-1 p-4 text-right text-sm  font-semibold  text-slate-900">
-						{formatPrice((item?.product?.price ?? 0) / 100)}
+						{formatPrice((item?.total ?? 0) / 100)}
 					</p>
 				</div>
 			</div>

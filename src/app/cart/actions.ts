@@ -18,10 +18,10 @@ export const removeItem = (
 	});
 };
 
-export const changeItemQuantity = async (itemId: string, quantity: number) => {
+export const changeItemQuantity = async (itemId: string, quantity: number, total: number) => {
 	await executeGraphql({
 		query: CartSetProductQuantityDocument,
-		variables: { itemId, quantity },
+		variables: { itemId, quantity, total },
 		cache: "no-store",
 		next: {
 			tags: ["cart"],

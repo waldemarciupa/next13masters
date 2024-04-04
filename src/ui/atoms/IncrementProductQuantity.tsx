@@ -1,26 +1,28 @@
 "use client";
 import { useOptimistic } from "react";
 import { changeItemQuantity } from "@/app/cart/actions";
+import { type OrderItem } from "@/gql/graphql";
 
-export const IncrementProductQuantity = ({
-	quantity,
-	itemId,
-}: {
-	quantity: number;
-	itemId: string;
-}) => {
-	const [optimisticQuantity, setOptimisticQuantity] = useOptimistic(quantity);
+type IncrementProductQuantityProps = {
+	item: OrderItem;
+};
+
+export const IncrementProductQuantity = ({ item }: IncrementProductQuantityProps) => {
+	const [optimisticQuantity, setOptimisticQuantity] = useOptimistic(item.quantity);
 
 	return (
 		<form className="mt-8">
-			{/* TODO: quantity */}
 			<div className="flex">
 				<button
 					data-testid="decrement"
 					className="h-6 w-6 border"
 					formAction={async () => {
 						setOptimisticQuantity(optimisticQuantity - 1);
-						await changeItemQuantity(itemId, optimisticQuantity - 1);
+						await changeItemQuantity(
+							item.id,
+							optimisticQuantity - 1,
+							(optimisticQuantity - 1) * (item.product?.price ?? 0),
+						);
 					}}
 				>
 					-
@@ -33,7 +35,11 @@ export const IncrementProductQuantity = ({
 					className="h-6 w-6 border"
 					formAction={async () => {
 						setOptimisticQuantity(optimisticQuantity + 1);
-						await changeItemQuantity(itemId, optimisticQuantity + 1);
+						await changeItemQuantity(
+							item.id,
+							optimisticQuantity + 1,
+							(optimisticQuantity + 1) * (item.product?.price ?? 0),
+						);
 					}}
 				>
 					+
