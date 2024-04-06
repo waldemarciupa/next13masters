@@ -1,7 +1,8 @@
 "use client";
 import { useOptimistic } from "react";
-import { changeItemQuantity } from "@/app/cart/actions";
+import { IncrementProductQuantityButton } from "./IncrementProductQuantityButton";
 import { type OrderItem } from "@/gql/graphql";
+import { decrease, increase } from "@/utils";
 
 type IncrementProductQuantityProps = {
 	item: OrderItem;
@@ -10,40 +11,28 @@ type IncrementProductQuantityProps = {
 export const IncrementProductQuantity = ({ item }: IncrementProductQuantityProps) => {
 	const [optimisticQuantity, setOptimisticQuantity] = useOptimistic(item.quantity);
 
+	const changeItemQuantity = (
+		func: (
+			item: OrderItem,
+			optimisticQuantity: number,
+			setOptimisticQuantity: (action: number | ((pendingState: number) => number)) => void,
+		) => void,
+	) => {
+		func(item, optimisticQuantity, setOptimisticQuantity);
+	};
+
 	return (
 		<form className="mt-8">
 			<div className="flex">
-				<button
-					data-testid="decrement"
-					className="h-6 w-6 border"
-					formAction={async () => {
-						setOptimisticQuantity(optimisticQuantity - 1);
-						await changeItemQuantity(
-							item.id,
-							optimisticQuantity - 1,
-							(optimisticQuantity - 1) * (item.product?.price ?? 0),
-						);
-					}}
-				>
+				<IncrementProductQuantityButton formAction={() => changeItemQuantity(decrease)}>
 					-
-				</button>
+				</IncrementProductQuantityButton>
 				<span className="w-8 text-center" data-testid="quantity">
 					{optimisticQuantity}
 				</span>
-				<button
-					data-testid="increment"
-					className="h-6 w-6 border"
-					formAction={async () => {
-						setOptimisticQuantity(optimisticQuantity + 1);
-						await changeItemQuantity(
-							item.id,
-							optimisticQuantity + 1,
-							(optimisticQuantity + 1) * (item.product?.price ?? 0),
-						);
-					}}
-				>
+				<IncrementProductQuantityButton formAction={() => changeItemQuantity(increase)}>
 					+
-				</button>
+				</IncrementProductQuantityButton>
 			</div>
 		</form>
 	);
