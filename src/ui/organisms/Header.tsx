@@ -21,7 +21,9 @@ export const Header = ({ params, query, items }: HeaderProps) => {
 		return (
 			<div className="bg-gray-100 px-8">
 				<div className="container mx-auto py-8">
-					<h2 className="font-medium">{`Found ${items} items for phrase "${query}"`}</h2>
+					<h2 className="font-medium">{`Found ${items} item${
+						items === 1 ? "" : "s"
+					} for phrase "${query}"`}</h2>
 				</div>
 			</div>
 		);

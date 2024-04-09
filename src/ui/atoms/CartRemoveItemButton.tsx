@@ -5,17 +5,17 @@ import { useRouter } from "next/navigation";
 import { removeItem } from "@/app/cart/actions";
 
 type CartRemoveItemButtonProps = {
-	orderId: string;
+	cartId: string;
 	orderItemId: string;
-	total: number;
-	itemTotal: number;
+	cartTotal: number;
+	orderItemTotal: number;
 };
 
 export function CartRemoveItemButton({
-	orderId,
+	cartId,
 	orderItemId,
-	total,
-	itemTotal,
+	cartTotal,
+	orderItemTotal,
 }: CartRemoveItemButtonProps) {
 	const router = useRouter();
 	const [isPending, startTransition] = useTransition();
@@ -25,7 +25,7 @@ export function CartRemoveItemButton({
 			disabled={isPending}
 			onClick={() =>
 				startTransition(async () => {
-					await removeItem(orderId, orderItemId, total, itemTotal);
+					await removeItem(cartId, orderItemId, cartTotal, orderItemTotal);
 					router.refresh();
 				})
 			}

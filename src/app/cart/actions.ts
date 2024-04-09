@@ -2,7 +2,8 @@
 
 import { revalidatePath } from "next/cache";
 import { executeGraphql } from "@/api/executeGraphql";
-import { CartDeleteOrderItemDocument, CartSetProductQuantityDocument } from "@/gql/graphql";
+import { CartAddOrUpdateOrderDocument, CartDeleteOrderItemDocument } from "@/gql/graphql";
+import { type OrderItem } from "@/ui/molecules/CartItem";
 
 export const removeItem = (
 	orderId: string,
@@ -18,10 +19,23 @@ export const removeItem = (
 	});
 };
 
-export const changeItemQuantity = async (itemId: string, quantity: number, total: number) => {
+export const changeItemQuantity = async (
+	cartId: string,
+	cartTotal: number,
+	item: OrderItem,
+	quantity: number,
+	orderTotal: number,
+) => {
 	await executeGraphql({
-		query: CartSetProductQuantityDocument,
-		variables: { itemId, quantity, total },
+		query: CartAddOrUpdateOrderDocument,
+		variables: {
+			orderId: cartId,
+			orderTotal: cartTotal,
+			productId: item?.product?.id ?? "",
+			total: orderTotal,
+			orderItemId: item.id,
+			quantity: quantity,
+		},
 		cache: "no-store",
 		next: {
 			tags: ["cart"],

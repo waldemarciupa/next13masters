@@ -1,24 +1,32 @@
 "use client";
 import { useOptimistic } from "react";
+import { type OrderItem } from "../molecules/CartItem";
 import { IncrementProductQuantityButton } from "./IncrementProductQuantityButton";
-import { type OrderItem } from "@/gql/graphql";
 import { decrease, increase } from "@/utils";
 
 type IncrementProductQuantityProps = {
+	cartId: string;
+	cartTotal: number;
 	item: OrderItem;
 };
 
-export const IncrementProductQuantity = ({ item }: IncrementProductQuantityProps) => {
+export const IncrementProductQuantity = ({
+	cartId,
+	cartTotal,
+	item,
+}: IncrementProductQuantityProps) => {
 	const [optimisticQuantity, setOptimisticQuantity] = useOptimistic(item.quantity);
 
 	const changeItemQuantity = (
 		func: (
+			cartId: string,
+			cartTotal: number,
 			item: OrderItem,
 			optimisticQuantity: number,
 			setOptimisticQuantity: (action: number | ((pendingState: number) => number)) => void,
 		) => void,
 	) => {
-		func(item, optimisticQuantity, setOptimisticQuantity);
+		func(cartId, cartTotal, item, optimisticQuantity, setOptimisticQuantity);
 	};
 
 	return (
