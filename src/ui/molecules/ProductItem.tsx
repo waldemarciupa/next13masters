@@ -63,7 +63,7 @@ export const ProductItem = async ({ id }: ProductItemProps) => {
 					)}
 					<form action={addToCartAction}>
 						<input type="hidden" name="productId" value={product.id} />
-						<AddToCartButton />
+						<AddToCartButton productName={product.name} />
 					</form>
 				</div>
 			</div>

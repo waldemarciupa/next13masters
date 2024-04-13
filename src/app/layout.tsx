@@ -5,6 +5,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import clsx from "clsx";
 import { Navigation } from "@/ui/organisms/Navigation";
 import { Footer } from "@/ui/organisms/Footer";
+import { Toaster } from "@/ui/atoms/Toaster";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,6 +21,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 				<ClerkProvider>
 					<Navigation />
 					<main className="flex-grow">{children}</main>
+					<Toaster />
 					<Footer />
 				</ClerkProvider>
 			</body>
