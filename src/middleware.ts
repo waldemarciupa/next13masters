@@ -12,6 +12,7 @@ export default authMiddleware({
 		"/categories/(.*)",
 		"/collections/",
 		"/collections/(.*)",
+		"/cart/success",
 	],
 });
 
