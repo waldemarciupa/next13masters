@@ -56,6 +56,10 @@ export async function handlePaymentAction() {
 		throw new Error("Stripe secret key not set");
 	}
 
+	if (!process.env.NEXT_PUBLIC_SITE_URL) {
+		throw new Error("Site URL not set");
+	}
+
 	const cart = await getCartByCookieId();
 
 	if (!cart) {
@@ -84,14 +88,14 @@ export async function handlePaymentAction() {
 			quantity: item.quantity,
 		})),
 		mode: "payment",
-		success_url: "http://localhost:3000/cart/success?session_id={CHECKOUT_SESSION_ID}",
-		cancel_url: "http://localhost:3000/cart/cancel?session_id={CHECKOUT_SESSION_ID}",
+		success_url: `${process.env.NEXT_PUBLIC_SITE_URL}/cart/success?sessionId={CHECKOUT_SESSION_ID}`,
+		cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL}/cart/cancel?sessionId={CHECKOUT_SESSION_ID}`,
 	});
 
 	if (!checkoutSession.url) {
 		throw new Error("Something went wrong");
 	}
 
-	cookies().set("cartId", cart.id);
+	cookies().set("cartId", "");
 	redirect(checkoutSession.url);
 }
