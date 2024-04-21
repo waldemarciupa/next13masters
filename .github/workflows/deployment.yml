@@ -19,7 +19,7 @@ jobs:
         run: npm install -g pnpm && pnpm install
 
       - name: Run unit tests
-        run: pnpm run test
+        run: pnpm run test:unit
 
       - name: Build app
         run: pnpm run build
