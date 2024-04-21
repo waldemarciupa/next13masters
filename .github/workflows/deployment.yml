@@ -21,9 +21,6 @@ jobs:
       - name: Run unit tests
         run: pnpm run test:unit
 
-      - name: Build app
-        run: pnpm run build
-
       - name: Install Vercel CLI
         run: pnpm add --global vercel@canary
 
