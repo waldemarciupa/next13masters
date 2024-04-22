@@ -5,7 +5,17 @@ test.describe("navigation", () => {
 		await page.goto(`${process.env.NEXT_PUBLIC_SITE_URL}/`);
 	});
 
-	test("main navigation", async ({ page }) => {
-		await expect(page).toHaveURL(`${process.env.NEXT_PUBLIC_SITE_URL}/`);
+	test("navigate all products", async ({ page }) => {
+		const nav = page.getByRole("navigation").first();
+		await nav.getByRole("link", { name: "All" }).click();
+		await expect(page).toHaveURL(`${process.env.NEXT_PUBLIC_SITE_URL}/products/1`);
+	});
+
+	test("navigate t-shirt category", async ({ page }) => {
+		const nav = page.getByRole("navigation").first();
+		await nav.getByRole("link", { name: "T-shirts" }).click();
+		const activeLink = await nav.locator("[aria-current]").first().innerHTML();
+		expect(activeLink).toBe("T-shirts");
+		await expect(page).toHaveURL(`${process.env.NEXT_PUBLIC_SITE_URL}/categories/t-shirts/1`);
 	});
 });
