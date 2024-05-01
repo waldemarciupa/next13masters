@@ -8,7 +8,6 @@ Install next13masters with pnpm
 
 ```bash
   pnpm install
-  cd next13masters
 ```
 
 ### Usage/Examples
