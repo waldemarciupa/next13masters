@@ -23,13 +23,13 @@ jobs:
         run: pnpm run test:unit
 
       - name: Install Vercel CLI
-        run: pnpm add -g vercel@latest
+        run: npm i -g vercel@latest
 
       - name: Pull Vercel Environment Information
-        run: vercel exec pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
 
       - name: Build for Vercel
-        run: vercel exec build --prod --token=${{ secrets.VERCEL_TOKEN }}
+        run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
 
       - name: Deploy to Vercel
-        run: vercel exec deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
+        run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
